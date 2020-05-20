@@ -57,7 +57,7 @@ export default class Time {
     }
 
     // 计算相差X秒内的信息不会显示时间
-    public getChatTime(options: TimeDiffer) {
+    public getChatTime(options: TimeDiffer<number>) {
         const { oTime, nTime, differ } = options
         // @ts-ignore
         oTime = this._timeFormat<number>(oTime);

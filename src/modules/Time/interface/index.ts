@@ -9,10 +9,10 @@ interface TimeFormal {
     [prop: string]: any
 }
 
-interface TimeDiffer {
-    oTime: number,
-    nTime: number,
-    differ: number
+interface TimeDiffer<T> {
+    oTime: T,
+    nTime: T,
+    differ: T
 }
 
 interface FormatTime {
