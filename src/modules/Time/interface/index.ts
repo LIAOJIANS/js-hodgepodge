@@ -9,9 +9,26 @@ interface TimeFormal {
     [prop: string]: any
 }
 
-export type TimeFunc = (data: number) => string
+interface TimeDiffer {
+    oTime: number,
+    nTime: number,
+    differ: number
+}
 
-export type TimeOptionsFunc = (options: TimeFormal) => string
+interface FormatTime {
+    time: number,
+    formatStr: string,
+    [prop: string]: any
+}
 
+type TimeFunc = (data: number) => string
 
+type TimeOptionsFunc = (options: TimeFormal) => string
 
+export {
+    TimeFormal,
+    TimeDiffer,
+    FormatTime,
+    TimeFunc,
+    TimeOptionsFunc
+}

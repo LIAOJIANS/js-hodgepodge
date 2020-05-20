@@ -15,3 +15,11 @@ console.log(time.getChatTime({
     nTime: 1589963293,
     differ: 300
 }))
+
+console.log('time' + time.getTime(textData))
+
+
+console.log(time.dateFormat({
+    time: textData,
+    formatStr: '{Y}-{MM}-{DD} {A} {t}:{ii}'
+}))

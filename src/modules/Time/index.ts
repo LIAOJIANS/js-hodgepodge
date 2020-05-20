@@ -1,3 +1,5 @@
+import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc } from './interface'
+
 export default class Time {
     /*
     * 计算星座
@@ -65,30 +67,51 @@ export default class Time {
             return this.getTime(nTime);
         }
     }
-
+    // 获取当前时间并格式化
     public getTime: TimeFunc = (data) => {
         data = this._timeFormat<number>(data);
         let now = (new Date()).getTime();
         let cha = (now - data) / 1000;
         if (cha < 43200) {
             // 当天
-            return this.dateFormat(new Date(data), "{A} {t}:{ii}");
+            return this.dateFormat({time: data, formatStr: "{A} {t}:{ii}"});
         } else if (cha < 518400) {
             // 隔天 显示日期+时间
-            return this.dateFormat(new Date(data), "{Mon}月{DD}日 {A} {t}:{ii}");
+            return this.dateFormat({time: data, formatStr: "{Mon}月{DD}日 {A} {t}:{ii}"});
         } else {
             // 隔年 显示完整日期+时间
-            return this.dateFormat(new Date(data), "{Y}-{MM}-{DD} {A} {t}:{ii}");
+            return this.dateFormat({time: data, formatStr: "{Y}-{MM}-{DD} {A} {t}:{ii}"});
         }
     }
-
+    // 判断时间戳长度
     _timeFormat<T>(data: T): number | T{
         // @ts-ignore
         return data.toString().length < 13 ? data * 1000 : data
     }
 
-    // 格式化时间
-    public dateFormat(date: Date, formatStr: string) {
+    /*
+    * 格式化时间
+    * @params: options 格式化配置对象
+    * 可以自定义格式： 如：{Y}-{MM}-{DD} {A} {t}:{ii}
+    * {
+    *  Y：年，
+    *  M: 不补0的月,
+    *  MM：补0的月
+    *  Mon：大写月
+    *  D: 日 如上
+    *  DD：日 如上
+    *  h：小时 如上
+    *  hh：小时如上
+    *  A：显示上午下午
+    *  i：分钟
+    *  ii: 分钟
+    *  s：秒钟
+    *  ss: 秒钟
+    * }
+    * */
+    public dateFormat: Format = (options) => {
+        const { time, formatStr } = options
+        const date = new Date(time)
         let dateObj = {},
             rStr = /\{([^}]+)\}/,
             mons: string[] = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
@@ -128,7 +151,7 @@ export default class Time {
         }
         return formatStr;
     }
-
+    // 补0
     parseNumber(num: number): any {
         return num < 10 ? "0" + num : num;
     }
@@ -138,26 +161,7 @@ export default class Time {
 
 
 
-/*
-* sumAge 接口
-*
-* */
-interface TimeFormal {
-    isTimestamp: boolean,
-    time: any,
-    type?: any,
-    [prop: string]: any
-}
-
-type TimeFunc = (data: number) => string
-
-type TimeOptionsFunc = (options: TimeFormal) => string
-
-interface TimeDiffer {
-    oTime: number,
-    nTime: number,
-    differ: number
-}
+type Format = (options: FormatTime) => string
 
 
 
