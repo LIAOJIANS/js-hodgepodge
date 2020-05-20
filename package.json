@@ -1,0 +1,24 @@
+{
+  "name": "hodgepodge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js"
+  },
+  "author": "shan <272781702@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-webpack-plugin": "^2.0.0",
+    "cross-env": "^7.0.2",
+    "html-webpack-plugin": "^4.3.0",
+    "ts-loader": "^5.3.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "typescript": "^2.7.2"
+  }
+}
