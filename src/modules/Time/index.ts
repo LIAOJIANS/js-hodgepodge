@@ -1,4 +1,4 @@
-import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc } from './interface'
+import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc, Format } from './interface'
 
 export default class Time {
     /*
@@ -83,6 +83,7 @@ export default class Time {
             return this.dateFormat({time: data, formatStr: "{Y}-{MM}-{DD} {A} {t}:{ii}"});
         }
     }
+
     // 判断时间戳长度
     _timeFormat<T>(data: T): number | T{
         // @ts-ignore
@@ -155,13 +156,11 @@ export default class Time {
     parseNumber(num: number): any {
         return num < 10 ? "0" + num : num;
     }
-
-
 }
 
 
 
-type Format = (options: FormatTime) => string
+
 
 
 

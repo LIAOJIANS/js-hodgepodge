@@ -5,7 +5,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.js"
   },
   "author": "shan <272781702@qq.com>",
   "license": "MIT",

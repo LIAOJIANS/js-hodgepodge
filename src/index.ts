@@ -1,5 +1,6 @@
-
 import Time from './modules/Time'
+import Tas from './modules/tas'
+import Cache from './modules/cache'
 
 let textData: number = new Date().getTime()
 let textTime: Date = new Date()
@@ -23,3 +24,35 @@ console.log(time.dateFormat({
     time: textData,
     formatStr: '{Y}-{MM}-{DD} {A} {t}:{ii}'
 }))
+
+
+
+let tas = new Tas()
+
+let count = 0
+
+// @ts-ignore
+window.onscroll = tas.debounce(() => {
+    count++
+    console.log(count)
+}, 10000)
+
+
+let cache = new Cache()
+
+cache.setLocalStorage('a', '1', 2000)
+const obj = {
+    a: 1
+}
+localStorage.setItem('qeq', JSON.stringify(obj))
+
+// @ts-ignore
+document.querySelector('.btn').addEventListener('click',() => {
+    console.log(cache.getLocalStorage('qeq'))
+})
+
+
+export {
+    Time,
+    Tas
+}

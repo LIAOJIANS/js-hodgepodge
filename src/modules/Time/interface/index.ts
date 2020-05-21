@@ -25,10 +25,13 @@ type TimeFunc = (data: number) => string
 
 type TimeOptionsFunc = (options: TimeFormal) => string
 
+type Format = (options: FormatTime) => string
+
 export {
     TimeFormal,
     TimeDiffer,
     FormatTime,
     TimeFunc,
-    TimeOptionsFunc
+    TimeOptionsFunc,
+    Format
 }
