@@ -4,8 +4,9 @@
 * */
 interface TimeFormal {
     isTimestamp: boolean,
-    time: any,
+    startTime: any,
     type?: any,
+    endTime?: any,
     [prop: string]: any
 }
 
@@ -27,11 +28,23 @@ type TimeOptionsFunc = (options: TimeFormal) => string
 
 type Format = (options: FormatTime) => string
 
+type dayInter = (formatStr?: string) => any
+
+type numberInter = () => number
+
+type stringInter = () => string
+
+type cycleInter = (formatStr?: string) => object
+
 export {
     TimeFormal,
     TimeDiffer,
     FormatTime,
     TimeFunc,
     TimeOptionsFunc,
-    Format
+    Format,
+    dayInter,
+    numberInter,
+    stringInter,
+    cycleInter
 }

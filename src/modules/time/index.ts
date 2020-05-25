@@ -1,4 +1,5 @@
-import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc, Format } from './interface'
+import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc, Format, dayInter,  numberInter, stringInter, cycleInter } from './interface'
+import { parseNumber, _timeFormat } from '../../tools/timeTools'
 
 export default class Time {
     /*
@@ -16,17 +17,27 @@ export default class Time {
     }
 
     /*
-    * 当前时间差
-    * @params date : string 时间
+    * 时间差
+    * @params options obj 配置对象
     * */
     public sumAge: TimeOptionsFunc = (options) => {
-        const {isTimestamp, time, type} = options;
-        let dateBegin: any = time;
+        const {isTimestamp, startTime, type, endTime} = options;
+        let dateBegin: any = startTime;
+        let dateEnd: any = endTime || new Date().getTime();
         if (!isTimestamp) {
-            dateBegin = new Date(time.replace(/-/g, "/")).getTime();
+            if(typeof startTime !== 'string' || typeof endTime !== 'string') {
+                throw new Error(`isTimestamp and configuration type are incorrect`)
+            }
+            dateBegin = new Date(startTime.replace(/-/g, "/")).getTime();
+            if(endTime) {
+                dateEnd = isTimestamp ? endTime : new Date(endTime.replace(/-/g, "/")).getTime()
+            }
+        } else {
+            if(typeof startTime !== 'number' || typeof endTime !== 'number') {
+                throw new Error(`isTimestamp and configuration type are incorrect`)
+            }
         }
-        let dateEnd: Date = new Date();
-        let dateDiff: number = dateEnd.getTime() - dateBegin;
+        let dateDiff: number = Math.abs(dateEnd - dateBegin);
         let dayDiff: number = Math.floor(dateDiff / (24 * 3600 * 1000));
         let leave1: number = dateDiff % (24 * 3600 * 1000);
         let hours: number = Math.floor(leave1 / (3600 * 1000));
@@ -60,16 +71,17 @@ export default class Time {
     public getChatTime(options: TimeDiffer<number>) {
         const { oTime, nTime, differ } = options
         // @ts-ignore
-        oTime = this._timeFormat<number>(oTime);
+        oTime = _timeFormat<number>(oTime);
         // @ts-ignore
-        nTime = this._timeFormat<number>(nTime);
+        nTime = _timeFormat<number>(nTime);
         if ((nTime - oTime / 1000) > differ) {
             return this.getTime(nTime);
         }
     }
+
     // 获取当前时间并格式化
     public getTime: TimeFunc = (data) => {
-        data = this._timeFormat<number>(data);
+        data = _timeFormat<number>(data);
         let now = (new Date()).getTime();
         let cha = (now - data) / 1000;
         if (cha < 43200) {
@@ -82,12 +94,6 @@ export default class Time {
             // 隔年 显示完整日期+时间
             return this.dateFormat({time: data, formatStr: "{Y}-{MM}-{DD} {A} {t}:{ii}"});
         }
-    }
-
-    // 判断时间戳长度
-    _timeFormat<T>(data: T): number | T{
-        // @ts-ignore
-        return data.toString().length < 13 ? data * 1000 : data
     }
 
     /*
@@ -113,6 +119,7 @@ export default class Time {
     public dateFormat: Format = (options) => {
         const { time, formatStr } = options
         const date = new Date(time)
+        // console.log(date)
         let dateObj = {},
             rStr = /\{([^}]+)\}/,
             mons: string[] = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
@@ -121,41 +128,122 @@ export default class Time {
         // @ts-ignore
         dateObj["M"] = date.getMonth() + 1;
         // @ts-ignore
-        dateObj["MM"] = this.parseNumber(dateObj["M"]);
+        dateObj["MM"] = parseNumber(dateObj["M"]);
         // @ts-ignore
         dateObj["Mon"] = mons[dateObj['M'] - 1];
         // @ts-ignore
         dateObj["D"] = date.getDate();
         // @ts-ignore
-        dateObj["DD"] = this.parseNumber(dateObj["D"]);
+        dateObj["DD"] = parseNumber(dateObj["D"]);
         // @ts-ignore
         dateObj["h"] = date.getHours();
         // @ts-ignore
-        dateObj["hh"] = this.parseNumber(dateObj["h"]);
+        dateObj["hh"] = parseNumber(dateObj["h"]);
         // @ts-ignore
         dateObj["t"] = dateObj["h"] > 12 ? dateObj["h"] - 12 : dateObj["h"];
         // @ts-ignore
-        dateObj["tt"] = this.parseNumber(dateObj["t"]);
+        dateObj["tt"] = parseNumber(dateObj["t"]);
         // @ts-ignore
         dateObj["A"] = dateObj["h"] > 12 ? '下午' : '上午';
         // @ts-ignore
         dateObj["i"] = date.getMinutes();
         // @ts-ignore
-        dateObj["ii"] = this.parseNumber(dateObj["i"]);
+        dateObj["ii"] = parseNumber(dateObj["i"]);
         // @ts-ignore
         dateObj["s"] = date.getSeconds();
         // @ts-ignore
-        dateObj["ss"] = this.parseNumber(dateObj["s"]);
+        dateObj["ss"] = parseNumber(dateObj["s"]);
         while (rStr.test(formatStr)) {
             // @ts-ignore
             formatStr = formatStr.replace(rStr, dateObj[RegExp.$1]);
         }
         return formatStr;
     }
-    // 补0
-    parseNumber(num: number): any {
-        return num < 10 ? "0" + num : num;
+
+    // 获取本月的最后一天
+    public getLastDayOfMonth: numberInter = () => {
+        const date: Date = new Date()
+        const month = date.getMonth()
+        date.setMonth(month + 1)
+        date.setDate(0)
+        return date.getDate() // 返回最后一天
     }
+
+    // 获取这个季度的第一天
+    public getFirstDayOfSeason: numberInter = () =>  {
+        const date: Date = new Date()
+        const month = date.getMonth()
+        console.log(month)
+        if(month < 3) {
+            date.setMonth(0)
+        } else if (2 < month && month < 6) {
+            date.setMonth(3)
+        } else if(5 < month && month < 9){
+            date.setMonth(6)
+        } else if(8 < month && month < 11){
+            date.setMonth(9)
+        }
+        date.setDate(1)
+        return date.getDate()
+    }
+
+    // 获取当天是周几
+    public getWeek: stringInter = () => {
+        const weekStr = '日一二三四五六'
+        return weekStr.charAt(new Date().getDay());
+    }
+
+    // 获取今天是当年的第几天
+    public getYearDay: numberInter = () => {
+        // @ts-ignore
+        return Math.ceil(( new Date() - new Date(new Date().getFullYear().toString())) / (24*60*60*1000))
+    }
+
+    // 获取今天是当年的第几周
+    public getYearWeek: numberInter = () => {
+        // @ts-ignore
+        return Math.ceil(((new Date() - new Date(new Date().getFullYear().toString())) / (24*60*60*1000)) / 7);
+    }
+
+    // 获取今年还剩下多少时间
+    public lastDay: numberInter = () => {
+        const data = new Date()
+        const nextYear = (data.getFullYear() + 1).toString();
+        // @ts-ignore
+        const lastDay: Date = new Date(new Date(nextYear) - 1); //获取本年的最后一毫秒：
+        // @ts-ignore
+        const diff = lastDay - data;  //毫秒数
+        return Math.floor(diff / (1000 * 60 * 60 * 24));
+    }
+
+    //获取N天后的日期
+    public GetDate(time: Date, count: number): string {
+        time.setDate(time.getDate() + count) //获取N天后的日期
+        const date = new Date(+time + 8 * 3600 * 1000)
+        return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
+    }
+
+    // 计算当周开始和结束时间
+    public getWeekCycle: cycleInter = (formatStr = '{Y}-{MM}-{DD} {A} {t}:{ii}') => {
+        const data: Date = new Date()
+        let weekday = data.getDay();
+        weekday = weekday === 0 ? 7 : weekday
+        // @ts-ignore
+        const firstDay = this.dateFormat({
+            time: new Date(this.GetDate(data, -weekday).replace(/-/g, "/")),
+            formatStr
+        })
+        // @ts-ignore
+        const lastDay = this.dateFormat({
+            time: new Date(this.GetDate(data,7 - 1).replace(/-/g, "/")),
+            formatStr
+        })
+        return {
+            firstDay,
+            lastDay
+        }
+    }
+
 }
 
 

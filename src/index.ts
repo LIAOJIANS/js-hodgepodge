@@ -1,5 +1,5 @@
-import Time from './modules/Time'
-import Tas from './modules/tas'
+import Time from './modules/time'
+import Tools from './modules/tools'
 import Cache from './modules/cache'
 
 let textData: number = new Date().getTime()
@@ -7,10 +7,15 @@ let textTime: Date = new Date()
 let time = new Time()
 
 console.log(time.getHoroscope(textData))
-console.log(time.sumAge({
+
+
+console.log('时间差' + time.sumAge({
     isTimestamp: false,
-    time: '2020/4/20 13:26:40'
+    startTime: '2020/6/25 13:26:40',
+    endTime: '2020/5/25 13:26:40'
 }))
+
+
 console.log(time.getChatTime({
     oTime: 1587360400,
     nTime: 1589963293,
@@ -18,21 +23,28 @@ console.log(time.getChatTime({
 }))
 
 console.log('time' + time.getTime(textData))
+console.log('month' + time.getLastDayOfMonth())
+console.log('季度第一天' + time.getFirstDayOfSeason())
+console.log('周' + time.getWeek())
+console.log('今天是今年的第几天' + time.getYearDay())
+console.log('今天是今年的第几周' + time.getYearWeek())
+console.log('今年还剩下几天' + time.lastDay())
+console.log(time.getWeekCycle('{Y}-{MM}-{DD} {A} {t}:{ii}'))
 
 
-console.log(time.dateFormat({
+console.log('当前时间格式化' + time.dateFormat({
     time: textData,
     formatStr: '{Y}-{MM}-{DD} {A} {t}:{ii}'
 }))
 
 
 
-let tas = new Tas()
+let tools = new Tools()
 
 let count = 0
 
 // @ts-ignore
-window.onscroll = tas.debounce(() => {
+window.onscroll = tools.debounce(() => {
     count++
     console.log(count)
 }, 10000)
@@ -53,6 +65,7 @@ document.querySelector('.btn').addEventListener('click',() => {
 
 
 export {
-    Time,
-    Tas
+    tools,
+    cache,
+    time
 }

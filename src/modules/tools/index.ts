@@ -36,7 +36,14 @@ export default class Tas {
         }
     }
 
-
+    /*
+     获取路由参数上的地址
+     @params: name key 要获取的变量名
+     */
+    public getUrlKey(name: string): any{
+        // @ts-ignore
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null
+    }
 
 }
 
