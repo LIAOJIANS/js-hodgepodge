@@ -1,12 +1,22 @@
-import { TimeFormal, TimeDiffer, FormatTime, TimeFunc, TimeOptionsFunc, Format, dayInter,  numberInter, stringInter, cycleInter } from './interface'
-import { parseNumber, _timeFormat } from '../../tools/timeTools'
+import {
+    TimeDiffer,
+    TimeFunc,
+    TimeOptionsFunc,
+    Format,
+    dayInter,
+    numberInter,
+    stringInter,
+    cycleInter,
+    getDateInter
+} from './interface'
+import {parseNumber, _timeFormat, timeSpanPositioning} from '../../tools/timeTools'
 
 export default class Time {
     /*
     * 计算星座
     * @params date : number 时间戳
     * */
-    public getHoroscope:TimeFunc = (date) => {
+    public getHoroscope: TimeFunc = (date) => {
         let constellation: string[] = ['摩羯', '水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '摩羯']
         let timeTransformation: Date = new Date(date);
         let month = timeTransformation.getMonth() + 1;
@@ -25,15 +35,15 @@ export default class Time {
         let dateBegin: any = startTime;
         let dateEnd: any = endTime || new Date().getTime();
         if (!isTimestamp) {
-            if(typeof startTime !== 'string' || typeof endTime !== 'string') {
+            if (typeof startTime !== 'string' || typeof endTime !== 'string') {
                 throw new Error(`isTimestamp and configuration type are incorrect`)
             }
             dateBegin = new Date(startTime.replace(/-/g, "/")).getTime();
-            if(endTime) {
+            if (endTime) {
                 dateEnd = isTimestamp ? endTime : new Date(endTime.replace(/-/g, "/")).getTime()
             }
         } else {
-            if(typeof startTime !== 'number' || typeof endTime !== 'number') {
+            if (typeof startTime !== 'number' || typeof endTime !== 'number') {
                 throw new Error(`isTimestamp and configuration type are incorrect`)
             }
         }
@@ -69,7 +79,7 @@ export default class Time {
 
     // 计算相差X秒内的信息不会显示时间
     public getChatTime(options: TimeDiffer<number>) {
-        const { oTime, nTime, differ } = options
+        const {oTime, nTime, differ} = options
         // @ts-ignore
         oTime = _timeFormat<number>(oTime);
         // @ts-ignore
@@ -117,9 +127,8 @@ export default class Time {
     * }
     * */
     public dateFormat: Format = (options) => {
-        const { time, formatStr } = options
+        const {time, formatStr} = options
         const date = new Date(time)
-        // console.log(date)
         let dateObj = {},
             rStr = /\{([^}]+)\}/,
             mons: string[] = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
@@ -170,21 +179,23 @@ export default class Time {
     }
 
     // 获取这个季度的第一天
-    public getFirstDayOfSeason: numberInter = () =>  {
+    public getFirstDayOfSeason: dayInter = (formatStr = '{Y}-{MM}-{DD}') => {
         const date: Date = new Date()
         const month = date.getMonth()
-        console.log(month)
-        if(month < 3) {
+        if (month < 3) {
             date.setMonth(0)
         } else if (2 < month && month < 6) {
             date.setMonth(3)
-        } else if(5 < month && month < 9){
+        } else if (5 < month && month < 9) {
             date.setMonth(6)
-        } else if(8 < month && month < 11){
+        } else if (8 < month && month < 11) {
             date.setMonth(9)
         }
-        date.setDate(1)
-        return date.getDate()
+        date.setDate(1);
+        return this.dateFormat({
+            time: date.getTime(),
+            formatStr
+        })
     }
 
     // 获取当天是周几
@@ -196,46 +207,49 @@ export default class Time {
     // 获取今天是当年的第几天
     public getYearDay: numberInter = () => {
         // @ts-ignore
-        return Math.ceil(( new Date() - new Date(new Date().getFullYear().toString())) / (24*60*60*1000))
+        return timeSpanPositioning(1)
     }
 
     // 获取今天是当年的第几周
     public getYearWeek: numberInter = () => {
         // @ts-ignore
-        return Math.ceil(((new Date() - new Date(new Date().getFullYear().toString())) / (24*60*60*1000)) / 7);
+        return timeSpanPositioning(7)
     }
 
     // 获取今年还剩下多少时间
     public lastDay: numberInter = () => {
         const data = new Date()
-        const nextYear = (data.getFullYear() + 1).toString();
+        const nextYear = (data.getFullYear() + 1).toString()
         // @ts-ignore
-        const lastDay: Date = new Date(new Date(nextYear) - 1); //获取本年的最后一毫秒：
+        const lastDay: Date = new Date(new Date(nextYear) - 1).getTime() // 获取本年的最后一毫秒：
         // @ts-ignore
-        const diff = lastDay - data;  //毫秒数
-        return Math.floor(diff / (1000 * 60 * 60 * 24));
+        const diff = lastDay - data  // 毫秒数
+        return Math.floor(diff / (1000 * 60 * 60 * 24))
     }
 
     //获取N天后的日期
-    public GetDate(time: Date, count: number): string {
+    public getDate: getDateInter = (time, count) => {
         time.setDate(time.getDate() + count) //获取N天后的日期
         const date = new Date(+time + 8 * 3600 * 1000)
         return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
     }
 
-    // 计算当周开始和结束时间
-    public getWeekCycle: cycleInter = (formatStr = '{Y}-{MM}-{DD} {A} {t}:{ii}') => {
+    /*
+    *  计算当周开始和结束时间
+    * @params formatStr string 时间格式
+    * */
+    public getWeekCycle: cycleInter = (formatStr = '{Y}-{MM}-{DD}') => {
         const data: Date = new Date()
         let weekday = data.getDay();
         weekday = weekday === 0 ? 7 : weekday
         // @ts-ignore
         const firstDay = this.dateFormat({
-            time: new Date(this.GetDate(data, -weekday).replace(/-/g, "/")),
+            time: new Date(this.getDate(data, -weekday).replace(/-/g, "/")).getTime(),
             formatStr
         })
         // @ts-ignore
         const lastDay = this.dateFormat({
-            time: new Date(this.GetDate(data,7 - 1).replace(/-/g, "/")),
+            time: new Date(this.getDate(data, 7 - 1).replace(/-/g, "/")).getTime(),
             formatStr
         })
         return {
@@ -243,7 +257,6 @@ export default class Time {
             lastDay
         }
     }
-
 }
 
 

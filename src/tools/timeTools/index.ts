@@ -16,7 +16,19 @@ function _timeFormat<T>(data: T): number | T{
     return data.toString().length < 13 ? data * 1000 : data
 }
 
+/*
+* 时间跨度定位
+* @params timeSpan number 年转换
+*
+* */
+type timeSpanInter = (timeSpan?: number) => number
+let timeSpanPositioning: timeSpanInter = (timeSpan = 1) =>  {
+    // @ts-ignore
+    return Math.ceil(( new Date() - new Date(new Date().getFullYear().toString())) / ( 24*60*60*1000) / timeSpan)
+}
+
 export  {
     parseNumber,
-    _timeFormat
+    _timeFormat,
+    timeSpanPositioning
 }

@@ -36,15 +36,16 @@ type stringInter = () => string
 
 type cycleInter = (formatStr?: string) => object
 
+type getDateInter = (time: Date, count: number) => string
+
 export {
-    TimeFormal,
     TimeDiffer,
-    FormatTime,
     TimeFunc,
     TimeOptionsFunc,
     Format,
     dayInter,
     numberInter,
     stringInter,
-    cycleInter
+    cycleInter,
+    getDateInter
 }

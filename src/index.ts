@@ -24,12 +24,13 @@ console.log(time.getChatTime({
 
 console.log('time' + time.getTime(textData))
 console.log('month' + time.getLastDayOfMonth())
-console.log('季度第一天' + time.getFirstDayOfSeason())
+console.log('季度第一天')
+console.log(time.getFirstDayOfSeason())
 console.log('周' + time.getWeek())
 console.log('今天是今年的第几天' + time.getYearDay())
 console.log('今天是今年的第几周' + time.getYearWeek())
 console.log('今年还剩下几天' + time.lastDay())
-console.log(time.getWeekCycle('{Y}-{MM}-{DD} {A} {t}:{ii}'))
+console.log(time.getWeekCycle('{Y}-{MM}-{DD}'))
 
 
 console.log('当前时间格式化' + time.dateFormat({
