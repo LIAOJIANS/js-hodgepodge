@@ -27,8 +27,13 @@ let timeSpanPositioning: timeSpanInter = (timeSpan = 1) =>  {
     return Math.ceil(( new Date() - new Date(new Date().getFullYear().toString())) / ( 24*60*60*1000) / timeSpan)
 }
 
+function convertTimestamps(time: string): number {
+    return new Date(time.replace(/-/g, "/")).getTime()
+}
+
 export  {
     parseNumber,
     _timeFormat,
-    timeSpanPositioning
+    timeSpanPositioning,
+    convertTimestamps
 }

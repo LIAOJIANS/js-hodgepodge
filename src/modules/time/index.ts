@@ -7,9 +7,11 @@ import {
     numberInter,
     stringInter,
     cycleInter,
-    getDateInter
+    getDateInter,
+    existInter
 } from './interface'
-import {parseNumber, _timeFormat, timeSpanPositioning} from '../../tools/timeTools'
+import {parseNumber, _timeFormat, timeSpanPositioning, convertTimestamps} from '../../tools/timeTools'
+import {ErrorMsg} from '../../utils/Error'
 
 export default class Time {
     /*
@@ -36,15 +38,15 @@ export default class Time {
         let dateEnd: any = endTime || new Date().getTime();
         if (!isTimestamp) {
             if (typeof startTime !== 'string' || typeof endTime !== 'string') {
-                throw new Error(`isTimestamp and configuration type are incorrect`)
+                ErrorMsg(`isTimestamp and configuration type are incorrect`)
             }
-            dateBegin = new Date(startTime.replace(/-/g, "/")).getTime();
+            dateBegin = convertTimestamps(startTime);
             if (endTime) {
-                dateEnd = isTimestamp ? endTime : new Date(endTime.replace(/-/g, "/")).getTime()
+                dateEnd = isTimestamp ? endTime : convertTimestamps(endTime)
             }
         } else {
             if (typeof startTime !== 'number' || typeof endTime !== 'number') {
-                throw new Error(`isTimestamp and configuration type are incorrect`)
+                ErrorMsg(`isTimestamp and configuration type are incorrect`)
             }
         }
         let dateDiff: number = Math.abs(dateEnd - dateBegin);
@@ -77,7 +79,7 @@ export default class Time {
         }
     }
 
-    // 计算相差X秒内的信息不会显示时间
+    /* 计算相差X秒内的信息不会显示时间 */
     public getChatTime(options: TimeDiffer<number>) {
         const {oTime, nTime, differ} = options
         // @ts-ignore
@@ -89,7 +91,7 @@ export default class Time {
         }
     }
 
-    // 获取当前时间并格式化
+    /* 获取当前时间并格式化 */
     public getTime: TimeFunc = (data) => {
         data = _timeFormat<number>(data);
         let now = (new Date()).getTime();
@@ -169,7 +171,7 @@ export default class Time {
         return formatStr;
     }
 
-    // 获取本月的最后一天
+    /* 获取本月的最后一天 */
     public getLastDayOfMonth: numberInter = () => {
         const date: Date = new Date()
         const month = date.getMonth()
@@ -178,7 +180,7 @@ export default class Time {
         return date.getDate() // 返回最后一天
     }
 
-    // 获取这个季度的第一天
+    /* 获取这个季度的第一天 */
     public getFirstDayOfSeason: dayInter = (formatStr = '{Y}-{MM}-{DD}') => {
         const date: Date = new Date()
         const month = date.getMonth()
@@ -198,25 +200,19 @@ export default class Time {
         })
     }
 
-    // 获取当天是周几
+    /* 获取当天是周几 */
     public getWeek: stringInter = () => {
         const weekStr = '日一二三四五六'
         return weekStr.charAt(new Date().getDay());
     }
 
-    // 获取今天是当年的第几天
-    public getYearDay: numberInter = () => {
-        // @ts-ignore
-        return timeSpanPositioning(1)
-    }
+    /* 获取今天是当年的第几天 */
+    public getYearDay: numberInter = () => timeSpanPositioning(1)
 
-    // 获取今天是当年的第几周
-    public getYearWeek: numberInter = () => {
-        // @ts-ignore
-        return timeSpanPositioning(7)
-    }
+    /* 获取今天是当年的第几周 */
+    public getYearWeek: numberInter = () => timeSpanPositioning(7)
 
-    // 获取今年还剩下多少时间
+    /* 获取今年还剩下多少时间 */
     public lastDay: numberInter = () => {
         const data = new Date()
         const nextYear = (data.getFullYear() + 1).toString()
@@ -227,7 +223,7 @@ export default class Time {
         return Math.floor(diff / (1000 * 60 * 60 * 24))
     }
 
-    //获取N天后的日期
+    /* 获取N天后的日期 */
     public getDate: getDateInter = (time, count) => {
         time.setDate(time.getDate() + count) //获取N天后的日期
         const date = new Date(+time + 8 * 3600 * 1000)
@@ -244,12 +240,12 @@ export default class Time {
         weekday = weekday === 0 ? 7 : weekday
         // @ts-ignore
         const firstDay = this.dateFormat({
-            time: new Date(this.getDate(data, -weekday).replace(/-/g, "/")).getTime(),
+            time: convertTimestamps(this.getDate(data, -weekday)),
             formatStr
         })
         // @ts-ignore
         const lastDay = this.dateFormat({
-            time: new Date(this.getDate(data, 7 - 1).replace(/-/g, "/")).getTime(),
+            time: convertTimestamps(this.getDate(data, 7 - 1)),
             formatStr
         })
         return {
@@ -257,10 +253,30 @@ export default class Time {
             lastDay
         }
     }
+
+    /*
+    * 判断某段时间是否在
+    * @params beginTime number | string 起始时间
+    * @params lastTime number | string 结束时间
+    * @param time number | string 判断的时间段
+    * */
+    public isExist: existInter = (options) => {
+        const { beginTime, lastTime, time } = options
+        if (!lastTime) ErrorMsg(`property lastTime cannot be empty`)
+        // @ts-ignore
+        beginTime = beginTime || new Date().getTime()
+        if (typeof lastTime === 'string' && typeof time === 'string') { // 正规时间格式
+            // @ts-ignore
+            lastTime = convertTimestamps(lastTime)
+            // @ts-ignore
+            time = convertTimestamps(time)
+        }
+        if (beginTime > lastTime) ErrorMsg('The end time can no longer be before the current time')
+        if (typeof lastTime !== 'number' && typeof beginTime !== 'number' && typeof time !== 'number') ErrorMsg('error in type')
+        // @ts-ignore
+        return beginTime < time && time < lastTime
+    }
 }
-
-
-
 
 
 

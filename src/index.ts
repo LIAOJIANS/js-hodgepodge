@@ -1,6 +1,9 @@
 import Time from './modules/time'
 import Tools from './modules/tools'
 import Cache from './modules/cache'
+import Check from './modules/reCheck'
+
+let check = new Check()
 
 let textData: number = new Date().getTime()
 let textTime: Date = new Date()
@@ -31,7 +34,10 @@ console.log('今天是今年的第几天' + time.getYearDay())
 console.log('今天是今年的第几周' + time.getYearWeek())
 console.log('今年还剩下几天' + time.lastDay())
 console.log(time.getWeekCycle('{Y}-{MM}-{DD}'))
-
+console.log('是否是时间区间' + time.isExist({
+    lastTime: '2020-07-01 15:36:47',
+    time: '2020-05-01 15:36:47'
+}))
 
 console.log('当前时间格式化' + time.dateFormat({
     time: textData,
