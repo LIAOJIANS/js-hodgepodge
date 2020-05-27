@@ -12,7 +12,7 @@ let time = new Time()
 console.log(time.getHoroscope(textData))
 
 
-console.log('时间差' + time.sumAge({
+console.log('时间差' + time.timeDifference({
     isTimestamp: false,
     startTime: '2020/6/25 13:26:40',
     endTime: '2020/5/25 13:26:40'
@@ -36,7 +36,7 @@ console.log('今年还剩下几天' + time.lastDay())
 console.log(time.getWeekCycle('{Y}-{MM}-{DD}'))
 console.log('是否是时间区间' + time.isExist({
     lastTime: '2020-07-01 15:36:47',
-    time: '2020-05-01 15:36:47'
+    time: '2020-06-01 15:36:47'
 }))
 
 console.log('当前时间格式化' + time.dateFormat({

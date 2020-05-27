@@ -5,7 +5,7 @@
 interface TimeFormal {
     isTimestamp: boolean,
     startTime: any,
-    type?: any,
+    type?: 'day' | 'hours' | 'minutes' | 'seconds' | 'HoursMinutes' | 'HoursMinutesSeconds' | 'timeHours' | 'timeHoursMinutes',
     endTime?: any,
     [prop: string]: any
 }
@@ -22,10 +22,16 @@ interface FormatTime {
     [prop: string]: any
 }
 
-interface exist {
-    beginTime?: number | string,
-    lastTime: number | string,
-    time: number | string
+interface existNumber {
+    beginTime?: number,
+    lastTime: number,
+    time: number
+}
+
+interface existString {
+    beginTime?: string,
+    lastTime: string,
+    time: string
 }
 
 type TimeFunc = (data: number) => string
@@ -44,7 +50,7 @@ type cycleInter = (formatStr?: string) => object
 
 type getDateInter = (time: Date, count: number) => string
 
-type existInter = (options: exist) => boolean
+type existInter = (options: existNumber | existString) => boolean
 
 export {
     TimeDiffer,

@@ -32,7 +32,7 @@ export default class Time {
     * 时间差
     * @params options obj 配置对象
     * */
-    public sumAge: TimeOptionsFunc = (options) => {
+    public timeDifference: TimeOptionsFunc = (options) => {
         const {isTimestamp, startTime, type, endTime} = options;
         let dateBegin: any = startTime;
         let dateEnd: any = endTime || new Date().getTime();
@@ -217,7 +217,7 @@ export default class Time {
         const data = new Date()
         const nextYear = (data.getFullYear() + 1).toString()
         // @ts-ignore
-        const lastDay: Date = new Date(new Date(nextYear) - 1).getTime() // 获取本年的最后一毫秒：
+        let lastDay: Date = new Date(new Date(nextYear) - 1).getTime() // 获取本年的最后一毫秒：
         // @ts-ignore
         const diff = lastDay - data  // 毫秒数
         return Math.floor(diff / (1000 * 60 * 60 * 24))
@@ -238,12 +238,10 @@ export default class Time {
         const data: Date = new Date()
         let weekday = data.getDay();
         weekday = weekday === 0 ? 7 : weekday
-        // @ts-ignore
         const firstDay = this.dateFormat({
             time: convertTimestamps(this.getDate(data, -weekday)),
             formatStr
         })
-        // @ts-ignore
         const lastDay = this.dateFormat({
             time: convertTimestamps(this.getDate(data, 7 - 1)),
             formatStr
@@ -261,23 +259,19 @@ export default class Time {
     * @param time number | string 判断的时间段
     * */
     public isExist: existInter = (options) => {
-        const { beginTime, lastTime, time } = options
+        let { beginTime, lastTime, time } = options
         if (!lastTime) ErrorMsg(`property lastTime cannot be empty`)
-        // @ts-ignore
         beginTime = beginTime || new Date().getTime()
         if (typeof lastTime === 'string' && typeof time === 'string') { // 正规时间格式
-            // @ts-ignore
             lastTime = convertTimestamps(lastTime)
-            // @ts-ignore
             time = convertTimestamps(time)
         }
         if (beginTime > lastTime) ErrorMsg('The end time can no longer be before the current time')
         if (typeof lastTime !== 'number' && typeof beginTime !== 'number' && typeof time !== 'number') ErrorMsg('error in type')
-        // @ts-ignore
         return beginTime < time && time < lastTime
     }
+
+    /*
+    *
+    * */
 }
-
-
-
-
