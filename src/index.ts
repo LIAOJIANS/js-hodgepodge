@@ -4,7 +4,8 @@ import Cache from './modules/cache'
 import Check from './modules/reCheck'
 
 let check = new Check()
-
+let tools = new Tools()
+let cache = new Cache()
 let textData: number = new Date().getTime()
 let textTime: Date = new Date()
 let time = new Time()
@@ -44,10 +45,6 @@ console.log('当前时间格式化' + time.dateFormat({
     formatStr: '{Y}-{MM}-{DD} {A} {t}:{ii}'
 }))
 
-
-
-let tools = new Tools()
-
 let count = 0
 
 // @ts-ignore
@@ -55,9 +52,6 @@ window.onscroll = tools.debounce(() => {
     count++
     console.log(count)
 }, 10000)
-
-
-let cache = new Cache()
 
 cache.setLocalStorage('a', '1', 2000)
 const obj = {

@@ -36,7 +36,7 @@ module.exports = {
     stats: 'errors-only',
     compress: true,
     host: 'localhost',
-    port: 8080,
+    port: 8081,
     open: true
   },
 }
