@@ -10,6 +10,9 @@ let textData: number = new Date().getTime()
 let textTime: Date = new Date()
 let time = new Time()
 
+// console.log(tools.Broswer())
+tools.viewWebPagePerformance()
+
 console.log(time.getHoroscope(textData))
 
 

@@ -272,6 +272,10 @@ export default class Time {
     }
 
     /*
-    *
+    * 判断某段时间是否在
+    * @params beginTime number | string 起始时间
+    * @params lastTime number | string 结束时间
+    * @param time number | string 判断的时间段
     * */
+    
 }
