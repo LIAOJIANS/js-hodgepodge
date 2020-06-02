@@ -1,4 +1,5 @@
 /build/
 .gitignore
+.idea
 /src/config/
 /src/template/

@@ -1,6 +1,5 @@
 import {tasInterface, currencyInterface} from './interface'
 
-
 export default class Tas {
   /*
   * 一个节流函数
@@ -231,7 +230,4 @@ export default class Tas {
       })
     }
   }
-
-
 }
-
