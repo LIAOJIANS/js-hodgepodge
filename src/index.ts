@@ -16,18 +16,19 @@ console.log(time.getHoroscope(textData))
 
 console.log('时间差' + time.timeDifference({
   isTimestamp: false,
+  type: 'day',
   startTime: '2020/6/25 13:26:40',
   endTime: '2020/5/25 13:26:40'
 }))
 
 
-console.log(time.getChatTime({
+console.log('是否显示时间' + time.getChatTime({
   oTime: 1587360400,
   nTime: 1589963293,
   differ: 300
 }))
 
-console.log('time' + time.getTime(textData))
+console.log('time' + time.getTime(1587360400))
 console.log('month' + time.getLastDayOfMonth())
 console.log('季度第一天')
 console.log(time.getFirstDayOfSeason())
