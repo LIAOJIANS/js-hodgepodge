@@ -1,4 +1,7 @@
 # js-hodgepodge 一个全面的JS工具库
+
+# 安装
+
 **使用npm命令安装**
 
 `npm i js-hodgepodge -S`
@@ -17,15 +20,15 @@ console.log(hodgepodge.check) // 查看check上所有API
 
 **按需引入**
 
-**Time模块**
+# Time模块
 
 这是一个包含大部分开发需要用到的时间模块，包括时间格式，引入如下：
 
 `import { time } from 'js-hodgepodge'`
 
-**API介绍**
+### API介绍
 
-**getHoroscope()**
+### getHoroscope()
 
 计算星座，传入时间戳返回对应的星座
 
@@ -39,7 +42,7 @@ console.log(hodgepodge.check) // 查看check上所有API
 let textData: number = new Date().getTime()
 console.log(time.getHoroscope(textData)) // 双子座
 ```
-**timeDifference()**
+### timeDifference()
 
 计算时间差,传入时间配置对象
 
@@ -59,7 +62,7 @@ startTime: '2020/6/25 13:26:40',
 endTime: '2020/5/25 13:26:40'
 })) // 时间差31天
 ```
-**getChatTime()**
+### getChatTime()
 
 计算相差X秒内的信息会不会显示时间，用于显示聊天消息时间居多，传入时间配置对象
 
@@ -77,7 +80,7 @@ nTime: 1589963293,
 differ: 300
 })) // 2020-05-20 下午 4:28
 ```
-**getTime()**
+### getTime()
 
 传入一个时间，与当前时间进行比较，比如当天下午6点40分，则显示下午6:40，用于显示显示发布时间、聊天时间居多，传入时间戳
 
@@ -92,7 +95,7 @@ console.log(time.getTime(1587360400)) // 2020-04-20 下午 1:26
 console.log(time.getTime(new Date().getTime())) // 下午 6:40
 console.log(time.getTime(new Date().getTime()， true)) // 2020-06-03 上午 10:41
 ```
-**dateFormat()**
+### dateFormat()
 
 格式化时间,可自定义格式，传入一个配置对象
 
@@ -132,7 +135,7 @@ time: new Date().getTime()
 })) // 当前时间格式化2020-06-03 上午 9:46
 ```
 
-**getLastDayOfMonth()**
+### getLastDayOfMonth()
 
 获取本月的最后一天
 
@@ -142,7 +145,7 @@ time: new Date().getTime()
 console.log('month' + time.getLastDayOfMonth()) // month30
 ```
 
-**getFirstDayOfSeason()**
+### getFirstDayOfSeason()
 
 获取这个季度的第一天
 
@@ -150,7 +153,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 `console.log('季度第一天' + time.getFirstDayOfSeason()) // 季度第一天2020-04-01`
 
-**getWeek()**
+### getWeek()
 
 获取当天是周几
 
@@ -158,7 +161,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 `console.log('周' + time.getWeek()) // 周三`
 
-**getYearDay()**
+### getYearDay()
 
 获取今天是当年的第几天
 
@@ -166,7 +169,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 `console.log('今天是今年的第' + time.getYearDay() + '天') // 今天是今年的第155天`
 
-**getYearWeek()**
+### getYearWeek()
 
 获取今天是当年的第几周
 
@@ -174,7 +177,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 `console.log('今天是今年的第' + time.getYearWeek() + '周') // 今天是今年的第23周`
 
-**lastDay()**
+### lastDay()
 
 获取今年还剩下多少时间
 
@@ -182,7 +185,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 `console.log('今年还剩下'+ time.lastDay() +'天' ) // 今年还剩下211天`
 
-**getDate()**
+### getDate()
 
 获取N天后的日期
 
@@ -198,7 +201,7 @@ console.log('获取N天后的日期' + time.getDate(new Date(), 7)) // 获取N�
 console.log('获取N天后的日期' + time.getDate(new Date().getTime(), 7)) // 获取N天后的日期2020-06-10 10:16:51
 ```
 
-**getWeekCycle()**
+### getWeekCycle()
 
 计算当周开始和结束时间
 
@@ -213,7 +216,8 @@ console.log(time.getWeekCycle('{Y}-{MM}-{DD} {A} {t}:{ii}:{ss}')) // {firstDay: 
 // 不传
 console.log(time.getWeekCycle()) // {firstDay: "2020-05-31", lastDay: "2020-06-06"}
 ```
-**isExist()**
+
+### isExist()
 
 判断某段时间是否存在
 
@@ -240,3 +244,4 @@ lastTime: 1587360400,
 time: 1589963293
 })) // 是否是2020-06-03 上午 10:56区间true
 ```
+# 未完待续。。。。。。。

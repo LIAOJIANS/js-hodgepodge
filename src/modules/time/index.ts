@@ -274,5 +274,4 @@ export default class Time {
     if (typeof lastTime !== 'number' && typeof beginTime !== 'number' && typeof time !== 'number') ErrorMsg('error in type')
     return _timeFormat(beginTime) < _timeFormat(time) && _timeFormat(time) < _timeFormat(lastTime)
   }
-
 }
