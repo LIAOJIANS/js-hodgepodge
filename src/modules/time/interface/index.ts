@@ -18,7 +18,7 @@ interface TimeDiffer<T> {
 
 interface FormatTime {
     time: number,
-    formatStr: string,
+    formatStr?: string,
     [prop: string]: any
 }
 
@@ -34,7 +34,7 @@ interface existString {
     time: string
 }
 
-type TimeFunc = (data: number) => string
+type TimeFunc = (data: number, isDisplay?: boolean) => string
 
 type TimeOptionsFunc = (options: TimeFormal) => string
 
@@ -48,7 +48,7 @@ type stringInter = () => string
 
 type cycleInter = (formatStr?: string) => object
 
-type getDateInter = (time: Date, count: number) => string
+type getDateInter = (time: Date | number, count: number) => string
 
 type existInter = (options: existNumber | existString) => boolean
 

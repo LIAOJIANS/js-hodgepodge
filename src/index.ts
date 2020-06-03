@@ -7,6 +7,7 @@ let check = new Check()
 let tools = new Tools()
 let cache = new Cache()
 let textData: number = new Date().getTime()
+console.log(textData)
 let textTime: Date = new Date()
 let time = new Time()
 
@@ -29,22 +30,26 @@ console.log('是否显示时间' + time.getChatTime({
 }))
 
 console.log('time' + time.getTime(1587360400))
+console.log(time.getTime(new Date().getTime(), true))
 console.log('month' + time.getLastDayOfMonth())
-console.log('季度第一天')
-console.log(time.getFirstDayOfSeason())
+console.log('季度第一天' + time.getFirstDayOfSeason())
 console.log('周' + time.getWeek())
 console.log('今天是今年的第几天' + time.getYearDay())
-console.log('今天是今年的第几周' + time.getYearWeek())
-console.log('今年还剩下几天' + time.lastDay())
-console.log(time.getWeekCycle('{Y}-{MM}-{DD}'))
-console.log('是否是时间区间' + time.isExist({
+console.log('今天是今年的第' + time.getYearWeek() + '周')
+console.log('今年还剩下'+ time.lastDay() +'天' )
+console.log(time.getWeekCycle())
+console.log('获取N天后的日期' + time.getDate(new Date(), 7))
+console.log('是否是'+ time.getTime(new Date().getTime(), true) +'区间' + time.isExist({
   lastTime: '2020-07-01 15:36:47',
   time: '2020-06-01 15:36:47'
 }))
+console.log('是否是'+ time.getTime(new Date().getTime(), true) +'区间' + time.isExist({
+  lastTime: 1592016303,
+  time: 1591325103
+}))
 
 console.log('当前时间格式化' + time.dateFormat({
-  time: textData,
-  formatStr: '{Y}-{MM}-{DD} {A} {t}:{ii}'
+  time: textData
 }))
 
 let count = 0
