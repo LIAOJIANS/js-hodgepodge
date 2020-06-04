@@ -1,4 +1,4 @@
-import {tasInterface, currencyInterface} from './interface'
+import {tasInterface, currencyInterface, disableCopyInter} from './interface'
 
 export default class Tas {
   /*
@@ -192,7 +192,10 @@ export default class Tas {
     * 禁用浏览器右键功能
     * @param: type string 选择禁用的功能
     * */
-  public disableCopySelection(type: string = 'all') {
+  public disableCopySelection(type: disableCopyInter) {
+    // @ts-ignore
+    type = type || 'all';
+    console.log(type);
     ['contextmenu', 'selectstart', 'copy'].forEach(function (ev) {
       if (type === ev) {
         document.addEventListener(ev, function (event) {

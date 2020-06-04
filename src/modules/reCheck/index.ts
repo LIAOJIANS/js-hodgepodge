@@ -27,23 +27,14 @@ export default class reCheck {
   /* 检测url是否合法 */
   public checkUrl: interCheck = (val) => /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/.test(val)
 
-  /* 国内电话号码 */
-  public checkDomesticTelephone: interCheck = (val) => /^\d{15}|\d{18}$/.test(val)
+  /* 国内座机号码 */
+  public checkDomesticTelephone: interCheck = (val) => /\d{3}-\d{8}|\d{4}-\d{7}/.test(val)
 
   /* 必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间 */
   public checkNotSpecial: appointLenInterCheck = (options) => new RegExp('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{'+ options.start +','+ options.end + '}$').test(options.val)
 
-  /* 日期格式 */
-  public checkTimeType: interCheck = (val) => /^\d{4}-\d{1,2}-\d{1,2}/.test(val)
-
-  /* 空白行 */
-  public checkBlank: interCheck = (val) => /\n\s*\r/.test(val)
-
   /* HTML标记 */
   public checkHtml: interCheck = (val) => new RegExp('<(\\S*?)[^>]*>.*?</\\1>|<.*? />').test(val)
-
-  /* 首尾空白字符 */
-  public checkFirstPlaceBlank: interCheck = (val) => /^\s*|\s*$/.test(val)
 
   /* 腾讯QQ号 */
   public checkQQ: interCheck = (val) => /[1-9][0-9]{4,}/.test(val)
@@ -52,7 +43,7 @@ export default class reCheck {
   public checkPostOffice: interCheck = (val) => /[1-9]\d{5}(?!\d)/.test(val)
 
   /* IP地址 */
-  public checkIP: interCheck = (val) => /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(val)
+  // public checkIP: interCheck = (val) => /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(val)
 
   /*----------------------------------------字符串校验-----------------------------------------------------------*/
 
@@ -72,7 +63,7 @@ export default class reCheck {
   public checkCID: interCheck = (val) => /^\d{15}|\d{18}$/.test(val)
 
   /* 以字母开头，长度在6~18之间，只能包含字母、数字和下划线 */
-  public checkPasswordSpecification: interCheck = (val) => /^[a-zA-Z]\w{5,17}$/.test(val)
+  public checkPasswordSpecification: appointLenInterCheck = (options) => new RegExp('^[a-zA-Z]\\w{'+ options.start +','+ options.end +'}$').test(options.val)
 
   /* 汉字 */
   public checkDChineseCharacterDetection: interCheck = (val) => /^[\u4e00-\u9fa5]*$/.test(val)
@@ -91,7 +82,7 @@ export default class reCheck {
   /* 验证字符串是否是数字*/
   public checkStrComposedOfNumber: interCheck = (val) => /^[0-9]+.?[0-9]*$/.test(val)
 
-  /* 检测N为数 */
+  /* 检测N位数 */
   public checkNumberLength: superInterCheck = (options) => new RegExp("^\\d{" + options.length + "}$").test(options.val)
 
   /* 检测m-n位的数字 */
@@ -141,8 +132,5 @@ export default class reCheck {
 
   /* 浮点数 */
   public checkFloat: interCheck = (val) => /^(-?\d+)(\.\d+)?$/.test(val)
-
-  /* 不以0开头的数字 */
-  public checkEndlessZero: interCheck = (val) => /^(0|[1-9][0-9]*)$/.test(val)
 
 }

@@ -6,71 +6,62 @@ import Check from './modules/reCheck'
 let check = new Check()
 let tools = new Tools()
 let cache = new Cache()
-let textData: number = new Date().getTime()
-console.log(textData)
-let textTime: Date = new Date()
 let time = new Time()
 
-console.log(tools.Broswer())
-console.log(time.getHoroscope(textData))
+// console.log(check.checkPhone(13428052268)) // true
+// console.log(check.checkPhone(11111111111)) // false
+//
+// console.log(check.checkEmail('272781702@qq.com')) // true
+// console.log(check.checkEmail(1111))
+//
+// console.log(check.checkUrl('http://www.baodu.com')) // true
+// console.log(check.checkUrl('http:www.baodu.com')) // false
+//
+//
+// console.log(check.checkNotSpecial({
+//   start: 8,
+//   end: 10,
+//   val: 'Ab12345678'
+// }))
+// console.log(check.checkNotSpecial({
+//   start: 8,
+//   end: 10,
+//   val: 'Ab12345'
+// }))
+
+// console.log(check.checkNonzeroNegative(-123245)) // true
+// console.log(check.checkNonzeroNegative(123)) // false
 
 
-console.log('时间差' + time.timeDifference({
-  isTimestamp: false,
-  type: 'day',
-  startTime: '2020/6/25 13:26:40',
-  endTime: '2020/5/25 13:26:40'
-}))
+// let count = 0
+// // @ts-ignore
+// window.addEventListener('scroll', tools.throttle((a = 2, b = 3) => {
+//   console.log('count' + count, ' 参数a '+ 2 , ' 参数b '+ 3)
+//   count += 1
+// }, 350))
+//
+// // @ts-ignore
 
 
-console.log('是否显示时间' + time.getChatTime({
-  oTime: 1587360400,
-  nTime: 1589963293,
-  differ: 300
-}))
-
-console.log('time' + time.getTime(1587360400))
-console.log(time.getTime(new Date().getTime(), true))
-console.log('month' + time.getLastDayOfMonth())
-console.log('季度第一天' + time.getFirstDayOfSeason())
-console.log('周' + time.getWeek())
-console.log('今天是今年的第几天' + time.getYearDay())
-console.log('今天是今年的第' + time.getYearWeek() + '周')
-console.log('今年还剩下'+ time.lastDay() +'天' )
-console.log(time.getWeekCycle())
-console.log('获取N天后的日期' + time.getDate(new Date(), 7))
-console.log('是否是'+ time.getTime(new Date().getTime(), true) +'区间' + time.isExist({
-  lastTime: '2020-07-01 15:36:47',
-  time: '2020-06-01 15:36:47'
-}))
-console.log('是否是'+ time.getTime(new Date().getTime(), true) +'区间' + time.isExist({
-  lastTime: 1592016303,
-  time: 1591325103
-}))
-
-console.log('当前时间格式化' + time.dateFormat({
-  time: textData
-}))
-
-let count = 0
-
+let count = 5
 // @ts-ignore
-window.onscroll = tools.debounce(() => {
-  count++
-  console.log(count)
-}, 10000)
+document.querySelector('.btn').addEventListener('click', function () {
+  // @ts-ignore
+  tools.cached(res => {
+    count += 5
+    console.log('res' + res) // 旧值
+    console.log('count' + count) // 新值
+  })(count)
 
-cache.setLocalStorage('a', '1', 2000)
-const obj = {
-  a: 1
-}
-localStorage.setItem('qeq', JSON.stringify(obj))
-
-// @ts-ignore
-document.querySelector('.btn').addEventListener('click', () => {
-  console.log(cache.getLocalStorage('qeq'))
 })
 
+console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
+
+const a = [1, 1, 2]
+console.log(tools.unique(a)) // [1, 2]
+
+// @ts-ignore
+console.log(tools.viewWebPagePerformance())
 
 export {
   tools,
@@ -78,3 +69,4 @@ export {
   time,
   check
 }
+4
