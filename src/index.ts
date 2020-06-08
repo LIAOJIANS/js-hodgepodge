@@ -69,4 +69,3 @@ export {
   time,
   check
 }
-4

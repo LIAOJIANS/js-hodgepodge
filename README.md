@@ -369,7 +369,7 @@ console.log(tools.capitalize('abcd')) // Abcd
 console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
 ```
 
-### getExplorerInfo()
+### Broswer()
 
 检测客户端是手机还是PC，true是PC， false 是手机端
 
