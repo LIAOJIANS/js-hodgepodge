@@ -3,8 +3,8 @@
   * 给双位数补0
   * @params num: 转换的值
   * */
-function parseNumber(num: number): any {
-    return num < 10 ? "0" + num : num;
+function parseNumber(num: number): number {
+    return num < 10 ? 0 + num : num;
 }
 
 /*

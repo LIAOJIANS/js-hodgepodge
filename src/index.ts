@@ -8,6 +8,13 @@ let tools = new Tools()
 let cache = new Cache()
 let time = new Time()
 
+export {
+  tools,
+  cache,
+  time,
+  check
+}
+
 // console.log(check.checkPhone(13428052268)) // true
 // console.log(check.checkPhone(11111111111)) // false
 //
@@ -63,9 +70,3 @@ console.log(tools.unique(a)) // [1, 2]
 // @ts-ignore
 console.log(tools.viewWebPagePerformance())
 
-export {
-  tools,
-  cache,
-  time,
-  check
-}

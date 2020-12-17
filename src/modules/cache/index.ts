@@ -18,7 +18,6 @@ export default class Cache {
             value: value,
             now: new Date().getTime()
         }
-        // @ts-ignore
         localStorage.setItem(key, JSON.stringify(obj))
     }
 

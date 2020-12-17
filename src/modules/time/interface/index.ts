@@ -22,16 +22,14 @@ interface FormatTime {
     [prop: string]: any
 }
 
-interface existNumber {
-    beginTime?: number,
-    lastTime: number,
-    time: number
+interface existModel {
+    beginTime?: number | string,
+    lastTime: number | string,
+    time: number | string
 }
 
-interface existString {
-    beginTime?: string,
-    lastTime: string,
-    time: string
+interface dateObjModel {
+    [pro: string]: any
 }
 
 type TimeFunc = (data: number, isDisplay?: boolean) => string
@@ -50,9 +48,10 @@ type cycleInter = (formatStr?: string) => object
 
 type getDateInter = (time: Date | number, count: number) => string
 
-type existInter = (options: existNumber | existString) => boolean
+type existInter = (options: existModel) => boolean
 
 export {
+    dateObjModel,
     TimeDiffer,
     TimeFunc,
     TimeOptionsFunc,

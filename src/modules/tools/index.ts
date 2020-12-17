@@ -1,4 +1,4 @@
-import {tasInterface, currencyInterface, disableCopyInter} from './interface'
+import {tasInterface, currencyInterface, explorerInfoModel} from './interface'
 
 export default class Tas {
   /*
@@ -9,8 +9,7 @@ export default class Tas {
   * */
   public throttle: tasInterface = (func, awai = 200) => {
     let lastTime: number = 0
-    // @ts-ignore
-    return (...args: Array) => {
+    return (...args: []) => {
       let now: number = new Date().getTime()
       if (now - lastTime > awai) {
         func.apply(this, args)
@@ -27,8 +26,7 @@ export default class Tas {
  * */
   public debounce: tasInterface = (func, awai = 200) => {
     let timer: any = null
-    // @ts-ignore
-    return (...args: Array) => {
+    return (...args: []) => {
       if (timer) clearTimeout(timer)
       timer = setTimeout(() => {
         func.apply(this, args)
@@ -74,38 +72,34 @@ export default class Tas {
     return val.charAt(0).toUpperCase() + val.slice(1)
   }
 
+  
+
   /*
  * 获取浏览器信息
  * */
-  public getExplorerInfo(): any {
+  public getExplorerInfo(): explorerInfoModel {
     let t = navigator.userAgent.toLowerCase();
     return 0 <= t.indexOf("msie") ? { //ie < 11
       type: "IE",
-      // @ts-ignore
-      version: Number(t.match(/msie ([\d]+)/)[1])
+      version: Number((t.match(/msie ([\d]+)/)as any)[1])
     } : !!t.match(/trident\/.+?rv:(([\d.]+))/) ? {
       type: "IE",
       version: 11
     } : 0 <= t.indexOf("edge") ? {
       type: "Edge",
-      // @ts-ignore
-      version: Number(t.match(/edge\/([\d]+)/)[1])
+      version: Number((t.match(/edge\/([\d]+)/) as any)[1])
     } : 0 <= t.indexOf("firefox") ? {
       type: "Firefox",
-      // @ts-ignore
-      version: Number(t.match(/firefox\/([\d]+)/)[1])
+      version: Number((t.match(/firefox\/([\d]+)/) as any)[1])
     } : 0 <= t.indexOf("chrome") ? {
       type: "Chrome",
-      // @ts-ignore
-      version: Number(t.match(/chrome\/([\d]+)/)[1])
+      version: Number((t.match(/chrome\/([\d]+)/) as any)[1])
     } : 0 <= t.indexOf("opera") ? {
       type: "Opera",
-      // @ts-ignore
-      version: Number(t.match(/opera.([\d]+)/)[1])
+      version: Number((t.match(/opera.([\d]+)/) as any)[1])
     } : 0 <= t.indexOf("Safari") ? {
       type: "Safari",
-      // @ts-ignore
-      version: Number(t.match(/version\/([\d]+)/)[1])
+      version: Number((t.match(/version\/([\d]+)/) as any)[1])
     } : {
       type: t,
       version: -1
@@ -192,10 +186,8 @@ export default class Tas {
     * 禁用浏览器右键功能
     * @param: type string 选择禁用的功能
     * */
-  public disableCopySelection(type: disableCopyInter) {
-    // @ts-ignore
+  public disableCopySelection(type?: 'all' | 'contextmenu' | 'selectstart' | 'copy') {
     type = type || 'all';
-    console.log(type);
     ['contextmenu', 'selectstart', 'copy'].forEach(function (ev) {
       if (type === ev) {
         document.addEventListener(ev, function (event) {

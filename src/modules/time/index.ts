@@ -8,7 +8,8 @@ import {
   stringInter,
   cycleInter,
   getDateInter,
-  existInter
+  existInter,
+  dateObjModel
 } from './interface'
 import {parseNumber, _timeFormat, timeSpanPositioning, convertTimestamps} from '../../tools/timeTools'
 import {ErrorMsg} from '../../utils/Error'
@@ -81,10 +82,8 @@ export default class Time {
 
   /* 计算相差X秒内的信息不会显示时间 */
   public getChatTime(options: TimeDiffer<number>) {
-    const {oTime, nTime, differ} = options
-    // @ts-ignore
+    let {oTime, nTime, differ} = options
     oTime = _timeFormat<number>(oTime);
-    // @ts-ignore
     nTime = _timeFormat<number>(nTime);
     if ((nTime - oTime / 1000) > differ) {
       return this.getTime(nTime);
@@ -132,41 +131,25 @@ export default class Time {
     let {time, formatStr} = options
     formatStr = formatStr || '{Y}-{MM}-{DD} {A} {t}:{ii}'
     const date = new Date(time)
-    let dateObj = {},
+    let dateObj: dateObjModel = {},
       rStr = /\{([^}]+)\}/,
       mons: string[] = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
-    // @ts-ignore
     dateObj["Y"] = date.getFullYear();
-    // @ts-ignore
     dateObj["M"] = date.getMonth() + 1;
-    // @ts-ignore
     dateObj["MM"] = parseNumber(dateObj["M"]);
-    // @ts-ignore
     dateObj["Mon"] = mons[dateObj['M'] - 1];
-    // @ts-ignore
     dateObj["D"] = date.getDate();
-    // @ts-ignore
     dateObj["DD"] = parseNumber(dateObj["D"]);
-    // @ts-ignore
     dateObj["h"] = date.getHours();
-    // @ts-ignore
     dateObj["hh"] = parseNumber(dateObj["h"]);
-    // @ts-ignore
     dateObj["t"] = dateObj["h"] > 12 ? dateObj["h"] - 12 : dateObj["h"];
-    // @ts-ignore
     dateObj["tt"] = parseNumber(dateObj["t"]);
-    // @ts-ignore
     dateObj["A"] = dateObj["h"] > 12 ? '下午' : '上午';
-    // @ts-ignore
     dateObj["i"] = date.getMinutes();
-    // @ts-ignore
     dateObj["ii"] = parseNumber(dateObj["i"]);
-    // @ts-ignore
     dateObj["s"] = date.getSeconds();
-    // @ts-ignore
     dateObj["ss"] = parseNumber(dateObj["s"]);
     while (rStr.test(formatStr)) {
-      // @ts-ignore
       formatStr = formatStr.replace(rStr, dateObj[RegExp.$1]);
     }
     return formatStr;
@@ -174,7 +157,7 @@ export default class Time {
 
   /* 获取本月的最后一天 */
   public getLastDayOfMonth: numberInter = () => {
-    const date: Date = new Date()
+    const date = new Date()
     const month = date.getMonth()
     date.setMonth(month + 1)
     date.setDate(0)
@@ -183,7 +166,7 @@ export default class Time {
 
   /* 获取这个季度的第一天 */
   public getFirstDayOfSeason: dayInter = (formatStr = '{Y}-{MM}-{DD}') => {
-    const date: Date = new Date()
+    const date = new Date()
     const month = date.getMonth()
     if (month < 3) {
       date.setMonth(0)
@@ -217,10 +200,8 @@ export default class Time {
   public lastDay: numberInter = () => {
     const data = new Date()
     const nextYear = (data.getFullYear() + 1).toString()
-    // @ts-ignore
-    let lastDay: Date = new Date(new Date(nextYear) - 1).getTime() // 获取本年的最后一毫秒：
-    // @ts-ignore
-    const diff = lastDay - data  // 毫秒数
+    let lastDay = new Date((new Date(nextYear) as any as number) - 1).getTime() // 获取本年的最后一毫秒；
+    const diff = lastDay - (data as any as number)  // 毫秒数
     return Math.floor(diff / (1000 * 60 * 60 * 24))
   }
 
@@ -239,7 +220,7 @@ export default class Time {
   * @params formatStr string 时间格式
   * */
   public getWeekCycle: cycleInter = (formatStr = '{Y}-{MM}-{DD}') => {
-    const data: Date = new Date()
+    const data = new Date()
     let weekday = data.getDay();
     weekday = weekday === 0 ? 7 : weekday
     const firstDay = this.dateFormat({
