@@ -22,7 +22,7 @@ function _timeFormat<T>(data: T): number | T{
 *
 * */
 type timeSpanInter = (timeSpan?: number) => number
-let timeSpanPositioning: timeSpanInter = (timeSpan = 1) =>  {
+const timeSpanPositioning: timeSpanInter = (timeSpan = 1) =>  {
     // @ts-ignore
     return Math.ceil(( new Date() - new Date(new Date().getFullYear().toString())) / ( 24*60*60*1000) / timeSpan)
 }

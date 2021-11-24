@@ -1,6 +1,6 @@
 {
   "name": "js-hodgepodge",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
@@ -20,6 +20,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "typescript": "^2.7.2"
+    "typescript": "^4.5.2"
   }
 }

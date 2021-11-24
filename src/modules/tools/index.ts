@@ -9,7 +9,7 @@ export default class Tas {
   * */
   public throttle: tasInterface = (func, awai = 200) => {
     let lastTime: number = 0
-    return (...args: []) => {
+    return (...args: any[]) => {
       let now: number = new Date().getTime()
       if (now - lastTime > awai) {
         func.apply(this, args)
@@ -26,7 +26,7 @@ export default class Tas {
  * */
   public debounce: tasInterface = (func, awai = 200) => {
     let timer: any = null
-    return (...args: []) => {
+    return (...args: any[]) => {
       if (timer) clearTimeout(timer)
       timer = setTimeout(() => {
         func.apply(this, args)
