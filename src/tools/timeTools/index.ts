@@ -11,8 +11,8 @@ function parseNumber(num: number): number {
 * 判断时间戳长度
 * @params data: 时间戳
 * */
-function _timeFormat<T>(data: T): number | T{
-    // @ts-ignore
+function timeFormat(data: number): number {
+
     return data.toString().length < 13 ? data * 1000 : data
 }
 
@@ -33,7 +33,7 @@ function convertTimestamps(time: string): number {
 
 export  {
     parseNumber,
-    _timeFormat,
+    timeFormat,
     timeSpanPositioning,
     convertTimestamps
 }
