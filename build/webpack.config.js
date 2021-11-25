@@ -11,7 +11,10 @@ module.exports = {
     path: resolve(__dirname, '..', 'dist')
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx'],
+    alias: {
+      'js-hodgepodge': resolve(__dirname, '..', 'src/packages')
+    }
   },
   module: {
     rules: [

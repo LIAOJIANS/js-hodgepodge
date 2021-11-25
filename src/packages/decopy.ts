@@ -1,8 +1,6 @@
-
+import typeOf from "../utils/typeOf"
 
 // 深拷贝
-import typeOf from "../utils/typeOf";
-
 export default function decopy<T>(data: T): T {
   let val = data as any
 

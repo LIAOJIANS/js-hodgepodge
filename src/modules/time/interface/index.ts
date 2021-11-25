@@ -10,12 +10,6 @@ interface TimeFormal {
     [prop: string]: any
 }
 
-interface TimeDiffer<T> {
-    oTime: T,
-    nTime: T,
-    differ: T
-}
-
 interface FormatTime {
     time: number,
     formatStr?: string,
@@ -52,7 +46,6 @@ type existInter = (options: existModel) => boolean
 
 export {
     dateObjModel,
-    TimeDiffer,
     TimeFunc,
     TimeOptionsFunc,
     Format,

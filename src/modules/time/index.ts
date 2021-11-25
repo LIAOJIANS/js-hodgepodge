@@ -1,5 +1,4 @@
 import {
-  TimeDiffer,
   TimeFunc,
   TimeOptionsFunc,
   Format,
@@ -81,7 +80,7 @@ export default class Time {
   }
 
   /* 计算相差X秒内的信息不会显示时间 */
-  public getChatTime(options: TimeDiffer<number>) {
+  public getChatTime(options: Record<'oTime' | 'nTime' | 'differ', number>) {
     let {oTime, nTime, differ} = options
     oTime = _timeFormat<number>(oTime);
     nTime = _timeFormat<number>(nTime);

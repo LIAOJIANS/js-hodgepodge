@@ -1,19 +1,48 @@
-import Time from './modules/time'
-import Tools from './modules/tools'
-import Cache from './modules/cache'
-import Check from './modules/reCheck'
+import cache, { 
+  setCooick,
+  getCooick,
+  removeCooick,
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage
+} from 'js-hodgepodge/cache'
 
-let check = new Check()
-let tools = new Tools()
-let cache = new Cache()
-let time = new Time()
+import decopy from 'js-hodgepodge/decopy'
 
-export {
-  tools,
-  cache,
-  time,
-  check
+import regExp from 'js-hodgepodge/regExp'
+
+export const cooick = {
+  setCooick,
+  getCooick,
+  removeCooick
 }
+
+export const storage = {
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage
+}
+
+
+export default {
+  ...cache,
+  ...regExp,
+  regExp,
+  decopy
+}
+
+
+
+// setLocalStorage()
+
+
+// console.log(getLocalStorage('token'));
+
+// console.log(setCooick('token', '111111'));
+
+// console.log(removeCooick('token'));
+
+// getCooick()
 
 // console.log(check.checkPhone(13428052268)) // true
 // console.log(check.checkPhone(11111111111)) // false
@@ -50,23 +79,25 @@ export {
 // // @ts-ignore
 
 
-let count = 5
-// @ts-ignore
-document.querySelector('.btn').addEventListener('click', function () {
-  // @ts-ignore
-  tools.cached(res => {
-    count += 5
-    console.log('res' + res) // 旧值
-    console.log('count' + count) // 新值
-  })(count)
+// let count = 5
+// // @ts-ignore
+// document.querySelector('.btn').addEventListener('click', function () {
+//   // @ts-ignore
+//   tools.cached(res => {
+//     count += 5
+//     console.log('res' + res) // 旧值
+//     console.log('count' + count) // 新值
+//   })(count)
 
-})
+// })
 
-console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
+// console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
 
-const a = [1, 1, 2]
-console.log(tools.unique(a)) // [1, 2]
+// const a = [1, 1, 2]
+// console.log(tools.unique(a)) // [1, 2]
 
-// @ts-ignore
-console.log(tools.viewWebPagePerformance())
+// // @ts-ignore
+// console.log(tools.viewWebPagePerformance())
+
+
 
