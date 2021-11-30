@@ -10,7 +10,7 @@ import {
   existInter,
   dateObjModel
 } from './interface'
-import {parseNumber, _timeFormat, timeSpanPositioning, convertTimestamps} from '../../tools/timeTools'
+import {parseNumber, timeFormat, timeSpanPositioning, convertTimestamps} from '../../tools/timeTools'
 import {ErrorMsg} from '../../utils/Error'
 
 export default class Time {
@@ -82,8 +82,8 @@ export default class Time {
   /* 计算相差X秒内的信息不会显示时间 */
   public getChatTime(options: Record<'oTime' | 'nTime' | 'differ', number>) {
     let {oTime, nTime, differ} = options
-    oTime = _timeFormat<number>(oTime);
-    nTime = _timeFormat<number>(nTime);
+    oTime = timeFormat(oTime);
+    nTime = timeFormat(nTime);
     if ((nTime - oTime / 1000) > differ) {
       return this.getTime(nTime);
     }
@@ -91,7 +91,7 @@ export default class Time {
 
   /* 获取当前时间并格式化 */
   public getTime: TimeFunc = (data, isDisplay = false) => {
-    data = _timeFormat<number>(data);
+    data = timeFormat(data);
     let now = (new Date()).getTime();
     let cha = (now - data) / 1000;
     if (cha < 43200 && !isDisplay) {
@@ -243,15 +243,15 @@ export default class Time {
   * @param time number | string 判断的时间段
   * */
   public isExist: existInter = (options) => {
-    let {beginTime, lastTime, time} = options
+    let {beginTime, lastTime, time} = options as Record<'beginTime' | 'lastTime' | 'time', number>
     if (!lastTime) ErrorMsg(`property lastTime cannot be empty`)
     beginTime = beginTime || new Date().getTime()
     if (typeof lastTime === 'string' && typeof time === 'string') { // 正规时间格式
       lastTime = convertTimestamps(lastTime)
       time = convertTimestamps(time)
     }
-    if (_timeFormat(beginTime) > _timeFormat(lastTime)) ErrorMsg('The end time can no longer be before the current time')
+    if (timeFormat(beginTime as number) > timeFormat(lastTime as number)) ErrorMsg('The end time can no longer be before the current time')
     if (typeof lastTime !== 'number' && typeof beginTime !== 'number' && typeof time !== 'number') ErrorMsg('error in type')
-    return _timeFormat(beginTime) < _timeFormat(time) && _timeFormat(time) < _timeFormat(lastTime)
+    return timeFormat(beginTime) < timeFormat(time) && timeFormat(time) < timeFormat(lastTime)
   }
 }
