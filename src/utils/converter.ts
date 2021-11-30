@@ -1,5 +1,3 @@
-
-
 export default {
   read: (val: string) => {
     if(val[0] === '"') {

@@ -113,6 +113,12 @@ export function setCooick(
     key + '=' + converter.write(val) + stringifiedAttributes)
 
 }
+
+/**
+ * 
+ * @param key 需要获取cooick的key
+ * @returns 获取的val值
+ */
 export function getCooick(key: string): any {
   const cookies = document.cookie ? document.cookie.split('; ') : []
 
@@ -135,6 +141,12 @@ export function getCooick(key: string): any {
   return key ? jar[key] : jar
 }
 
+
+/**
+ * 
+ * @param key 需要删除cooick的key
+ * @param attributes 扩展属性
+ */
 export function removeCooick(
   key: string,
   attributes: { path?: string, expires?: any, [key: string]: any }

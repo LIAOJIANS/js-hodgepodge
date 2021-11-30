@@ -42,7 +42,7 @@ export const checkQQ: interCheck = (val) => /[1-9][0-9]{4,}/.test(val)
 export const checkPostOffice: interCheck = (val) => /[1-9]\d{5}(?!\d)/.test(val)
 
 /* IP地址 */
-// const checkIP: interCheck = (val) => /((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))/.test(val)
+export const checkIP: interCheck = (val) =>  /^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$/.test(val)
 
 /*----------------------------------------字符串校验-----------------------------------------------------------*/
 
@@ -147,6 +147,7 @@ export default {
   checkUpperCase,
   checkAlphabets,
   checkCID,
+  checkIP,
   checkPasswordSpecification,
   checkDChineseCharacterDetection,
   checkNumberUnderscoreletter,
