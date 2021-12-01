@@ -1,4 +1,5 @@
 import { logError } from "./Error";
+import typeOf from "./typeOf";
 
 /*
   * 给双位数补0
@@ -9,10 +10,10 @@ function parseNumber(num: number): number {
 }
 
 /*
-* 判断时间戳长度
+* 统一时间戳长度
 * @params data: 时间戳
 * */
-function _timeFormat<T>(data: T): number | T {
+function timeFormat<T>(data: T): number | T {
   // @ts-ignore
   return data.toString().length < 13 ? data * 1000 : data
 }
@@ -32,16 +33,32 @@ function convertTimestamps(time: string): number | null {
   if (/-/g.test(time)) {
     return new Date(time.replace(/-/g, "/")).getTime()
   } else {
-    logError('The date format is incorrect. The recommended format is standard timestamp, or date, or XXXX XX XX HH: mm: SS')
+    logError('The date format is incorrect. The recommended format is standard timestamp, or date, or XXXX-XX-XX HH: mm: SS')
     return null
   }
 
 }
 
+function dateUniFormat<T extends string | number | Date>(date: T): T | null {
+  if(
+    ['string', 'date', 'number'].indexOf(<string>typeOf(date)) === -1
+  ) {
+    logError(`Expected string、number、date type, but got ${typeOf(date)} type`)
+    return null
+  }
+
+  if(typeOf(date) === 'number') {
+    date = timeFormat(date) as T
+  }
+
+  return date
+}
+
 
 export {
   parseNumber,
-  _timeFormat,
+  timeFormat,
   timeSpanPositioning,
-  convertTimestamps
+  convertTimestamps,
+  dateUniFormat
 }
