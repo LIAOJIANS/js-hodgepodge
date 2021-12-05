@@ -1,7 +1,8 @@
 
 export function ErrorMsg(msg: string): void {
-  if (!msg) return
-  // @ts-ignore
+  if (!msg) {
+    return
+  }
   throw new Error(msg)
 }
 

@@ -75,7 +75,7 @@ export const dateDifference: TimeOptionsFunc = (options) => {
     return null
   }
 
-  if (!(date = dateUniFormat<number>(date as number)!)) {
+  if (!(startTime = dateUniFormat(startTime)!)) {
     return null
   }
 
@@ -274,9 +274,7 @@ export function getFirstDayOfSeason(
   return null
 }
 
-export function getWeek(): string {
-  return '日一二三四五六'.charAt(new Date().getDay())
-}
+export const getWeek = () => '日一二三四五六'.charAt(new Date().getDay())
 
 /* 获取今天是当年的第几天 */
 export const getYearDay = () => timeSpanPositioning(1)
@@ -323,7 +321,6 @@ export function getAfterCountDays (
 
   return new Date(+date + 8 * 3600 * 1000).toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
 }
-
 
 export default {
   getHoroscope,
