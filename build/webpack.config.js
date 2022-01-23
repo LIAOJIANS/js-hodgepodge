@@ -6,19 +6,26 @@ const { resolve } = require('path');
 module.exports = {
   entry: "./src/index.ts",
   mode: process.env.NODE_ENV,
-  output: {
+  output: { 
     filename: "index.js",
-    path: resolve(__dirname, '..', 'dist')
+    path: resolve(__dirname, '..', 'dist'),
+    libraryTarget: 'umd',
+    library: 'hodgepodge',
+    globalObject: 'this'
   },
   resolve: {
-    extensions: ['.js', '.ts', '.tsx']
+    extensions: ['.js', '.ts', '.tsx'],
+    alias: {}
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        test: /\.(j|t)sx?$/,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'ts-loader' }
+        ]
       }
     ]
   },

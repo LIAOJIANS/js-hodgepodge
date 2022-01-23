@@ -11,13 +11,16 @@
   "author": "shan <272781702@qq.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^2.0.0",
     "cross-env": "^7.0.2",
     "html-webpack-plugin": "^4.3.0",
-    "ts-loader": "^5.3.3",
+    "ts-loader": "^5.4.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "typescript": "^2.7.2"
