@@ -1,19 +1,19 @@
-interface optionsInter {
+export interface optionsInter {
   val: any,
   length: number
 }
 
-interface appointLen {
+export interface appointLen {
   start: number,
   end: number,
   val: any
 }
 
-type interCheck = (val: any) => boolean
+export type interCheck = (val: any) => boolean
 
-type superInterCheck = (options: optionsInter) => boolean
+export type superInterCheck = (options: optionsInter) => boolean
 
-type appointLenInterCheck = (options: appointLen) => boolean
+export type appointLenInterCheck = (options: appointLen) => boolean
 
 /*---------------------------------------------其他校验-------------------------------------------------------*/
 

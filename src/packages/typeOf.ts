@@ -1,4 +1,4 @@
-import { logError } from "./Error"
+import { logError } from "../utils/Error"
 
 export const typeOf = (target: any): 'boolean' | 'number' | 'string' | 'function' | 'array' | 'date' | 'regExp' | 'undefined' | 'null' | 'object' | 'promise' | 'regexp' | null => {
   const toString = Object.prototype.toString

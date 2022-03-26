@@ -6,7 +6,6 @@ export function ErrorMsg(msg: string): void {
   throw new Error(msg)
 }
 
-
 export function logError(msg: string) {
 
   if (!msg) {

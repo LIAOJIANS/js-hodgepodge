@@ -9,22 +9,14 @@
 **全局引入**
 `import * as hodgepodge from 'js-hodgepodge'`
 
-具体调用
-```
-console.log(hodgepodge.time) // 查看time模块上所有API
-console.log(hodgepodge.tools) // 查看tools上所有API
-console.log(hodgepodge.cache) // 查看cache上所有API
-console.log(hodgepodge.check) // 查看check上所有API
-```
-目前只上线了四大板块，后续会维护更新
-
 **按需引入**
 
-# Time模块
+`import {...方法名} from 'js-hodgepodge'`
+
+# Date模块
 
 这是一个包含大部分开发需要用到的时间模块，包括时间格式，引入如下：
 
-`import { time } from 'js-hodgepodge'`
 
 ### API介绍
 
@@ -40,7 +32,7 @@ console.log(hodgepodge.check) // 查看check上所有API
 **示例:**
 ```
 let textData: number = new Date().getTime()
-console.log(time.getHoroscope(textData)) // 双子座
+console.log(getHoroscope(textData)) // 双子座
 ```
 ### timeDifference()
 
@@ -55,7 +47,7 @@ console.log(time.getHoroscope(textData)) // 双子座
 
 **示例:**
 ```
-console.log('时间差' + time.timeDifference({
+console.log('时间差' + timeDifference({
 isTimestamp: false,
 type: 'day',
 startTime: '2020/6/25 13:26:40',
@@ -74,7 +66,7 @@ endTime: '2020/5/25 13:26:40'
 
 **示例:**
 ```
-console.log(time.getChatTime({
+console.log(getChatTime({
 oTime: 1587360400,
 nTime: 1589963293,
 differ: 300
@@ -91,9 +83,9 @@ differ: 300
 
 **示例:**
 ```
-console.log(time.getTime(1587360400)) // 2020-04-20 下午 1:26
-console.log(time.getTime(new Date().getTime())) // 下午 6:40
-console.log(time.getTime(new Date().getTime()， true)) // 2020-06-03 上午 10:41
+console.log(getTime(1587360400)) // 2020-04-20 下午 1:26
+console.log(getTime(new Date().getTime())) // 下午 6:40
+console.log(getTime(new Date().getTime()， true)) // 2020-06-03 上午 10:41
 ```
 ### dateFormat()
 
@@ -125,12 +117,12 @@ console.log(time.getTime(new Date().getTime()， true)) // 2020-06-03 上午 10:
 **示例:**
 可以自定义格式： 如 {t}:{ii}
 ```
-console.log('当前时间格式化' + time.dateFormat({
+console.log('当前时间格式化' + dateFormat({
 time: new Date().getTime(),
 formatStr: '{t}:{ii}'
 })) // 当前时间格式化9:45
 // 不传
-console.log('当前时间格式化' + time.dateFormat({
+console.log('当前时间格式化' + dateFormat({
 time: new Date().getTime()
 })) // 当前时间格式化2020-06-03 上午 9:46
 ```
@@ -142,7 +134,7 @@ time: new Date().getTime()
 **示例:**
 可以自定义格式： 如 {t}:{ii}
 ```
-console.log('month' + time.getLastDayOfMonth()) // month30
+console.log('month' + getLastDayOfMonth()) // month30
 ```
 
 ### getFirstDayOfSeason()
@@ -151,7 +143,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 **示例:**
 
-`console.log('季度第一天' + time.getFirstDayOfSeason()) // 季度第一天2020-04-01`
+`console.log('季度第一天' + getFirstDayOfSeason()) // 季度第一天2020-04-01`
 
 ### getWeek()
 
@@ -159,7 +151,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 **示例:**
 
-`console.log('周' + time.getWeek()) // 周三`
+`console.log('周' + getWeek()) // 周三`
 
 ### getYearDay()
 
@@ -167,7 +159,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 **示例:**
 
-`console.log('今天是今年的第' + time.getYearDay() + '天') // 今天是今年的第155天`
+`console.log('今天是今年的第' + getYearDay() + '天') // 今天是今年的第155天`
 
 ### getYearWeek()
 
@@ -175,7 +167,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 **示例:**
 
-`console.log('今天是今年的第' + time.getYearWeek() + '周') // 今天是今年的第23周`
+`console.log('今天是今年的第' + getYearWeek() + '周') // 今天是今年的第23周`
 
 ### lastDay()
 
@@ -183,7 +175,7 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 
 **示例:**
 
-`console.log('今年还剩下'+ time.lastDay() +'天' ) // 今年还剩下211天`
+`console.log('今年还剩下'+ lastDay() +'天' ) // 今年还剩下211天`
 
 ### getDate()
 
@@ -197,8 +189,8 @@ console.log('month' + time.getLastDayOfMonth()) // month30
 **示例:**
 
 ```
-console.log('获取N天后的日期' + time.getDate(new Date(), 7)) // 获取N天后的日期2020-06-10 10:16:51
-console.log('获取N天后的日期' + time.getDate(new Date().getTime(), 7)) // 获取N天后的日期2020-06-10 10:16:51
+console.log('获取N天后的日期' + getDate(new Date(), 7)) // 获取N天后的日期2020-06-10 10:16:51
+console.log('获取N天后的日期' + getDate(new Date().getTime(), 7)) // 获取N天后的日期2020-06-10 10:16:51
 ```
 
 ### getWeekCycle()
@@ -212,9 +204,9 @@ console.log('获取N天后的日期' + time.getDate(new Date().getTime(), 7)) //
 **示例:**
 
 ```
-console.log(time.getWeekCycle('{Y}-{MM}-{DD} {A} {t}:{ii}:{ss}')) // {firstDay: "2020-05-31 上午 10:19:35", lastDay: "2020-06-06 上午 10:19:35"}
+console.log(getWeekCycle('{Y}-{MM}-{DD} {A} {t}:{ii}:{ss}')) // {firstDay: "2020-05-31 上午 10:19:35", lastDay: "2020-06-06 上午 10:19:35"}
 // 不传
-console.log(time.getWeekCycle()) // {firstDay: "2020-05-31", lastDay: "2020-06-06"}
+console.log(getWeekCycle()) // {firstDay: "2020-05-31", lastDay: "2020-06-06"}
 ```
 
 ### isExist()
@@ -233,13 +225,13 @@ console.log(time.getWeekCycle()) // {firstDay: "2020-05-31", lastDay: "2020-06-0
 
 ```
 // string类型
-console.log('是否是'+ time.getTime(new Date().getTime(), true) +'区间' + time.isExist({
+console.log('是否是'+ getTime(new Date().getTime(), true) +'区间' + time.isExist({
 lastTime: '2020-07-01 15:36:47',
 time: '2020-06-01 15:36:47'
 })) // 是否是2020-06-03 上午 10:38区间false
 
 // number类型
-console.log('是否是'+ new Date().getDay +'区间' + time.isExist({
+console.log('是否是'+ new Date().getDay +'区间' + isExist({
 lastTime: 1587360400,
 time: 1589963293
 })) // 是否是2020-06-03 上午 10:56区间true
@@ -248,8 +240,6 @@ time: 1589963293
 # 常用的工具函数模块
 
 这是一个开发常用的工具函数库
-
-`import { tools } from 'js-hodgepodge'`
 
 ### API介绍
 
@@ -267,7 +257,7 @@ time: 1589963293
 ```
 /* 向下滚动时，每隔350ms打印出 count count + 1  参数a 2  参数b 3 */
 let count = 0
-window.addEventListener('scroll', tools.throttle((a = 2, b = 3) => {
+window.addEventListener('scroll', throttle((a = 2, b = 3) => {
 console.log('count' + count, ' 参数a '+ 2 , ' 参数b '+ 3)
 count += 1
 }, 350))
@@ -286,9 +276,64 @@ count += 1
 
 ```
 /* 无间断点击时，会在350MS执行后执行最后一次点击 */
-document.querySelector('.btn').addEventListener('click', tools.debounce(() => {
+document.querySelector('.btn').addEventListener('click', debounce(() => {
 console.log('调用API')
 }, 350))
+
+```
+
+### clipboard()
+
+点击复制内容
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  text | false  | any | 文本内容 |
+|  target | false  | Element | 复制目标元素（复制他里的innerText） |
+
+**示例:**
+
+```
+clipboard('啦啦啦')
+
+function elementP() {
+    const el = document.createElement('p')
+    el.innerText = '啦啦啦'
+    return p
+}
+
+document.querySelector('body').appendChild(elementP())
+
+clipboard(null, elementP())
+
+```
+
+### decopy()
+
+从根源上的深拷贝
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  data | true  | any | 拷贝的内容 |
+
+**示例:**
+
+```
+decopy({})
+```
+
+### typeOf()
+
+获取类型
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  target | true  | any | 查询的目标 |
+
+**示例:**
+
+```
+typeOf({}) // object
 ```
 
 ### getUrlKey()
@@ -305,7 +350,7 @@ console.log('调用API')
 /* 假设当前网址为 'http://127.0.0.1:8080/public/myBlog/bolgInfo?code=1321321321' */
 
 create() {
-const code = tools.getUrlKey('code') // 1321321321
+const code = getUrlKey('code') // 1321321321
 }
 ```
 
@@ -321,9 +366,9 @@ const code = tools.getUrlKey('code') // 1321321321
 
 ```
 let obj = {}
-console.log(tools.isObjectLike(obj)) // true
+console.log(isObjectLike(obj)) // true
 let obj = ''
-console.log(tools.isObjectLike(obj)) // false
+console.log(isObjectLike(obj)) // false
 ```
 ### cached()
 
@@ -338,13 +383,14 @@ console.log(tools.isObjectLike(obj)) // false
 ```
 let count = 5
 document.querySelector('.btn').addEventListener('click', function () {
-tools.cached(res => {
+cached(res => {
 count += 5
 console.log('res' + res) // 旧值 5
 console.log('count' + count) // 新值 10
 })(count)
 })
 ```
+
 ### capitalize()
 
 把字符串首位转为大写
@@ -356,7 +402,7 @@ console.log('count' + count) // 新值 10
 **示例:**
 
 ```
-console.log(tools.capitalize('abcd')) // Abcd
+console.log(capitalize('abcd')) // Abcd
 ```
 
 ### getExplorerInfo()
@@ -366,18 +412,9 @@ console.log(tools.capitalize('abcd')) // Abcd
 **示例:**
 
 ```
-console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
+console.log(getExplorerInfo()) // {type: "Chrome", version: 78}
 ```
 
-### Broswer()
-
-检测客户端是手机还是PC，true是PC， false 是手机端
-
-**示例:**
-
-```
-console.log(tools.Broswer()) // true
-```
 
 ### getRawType()
 
@@ -390,7 +427,7 @@ console.log(tools.Broswer()) // true
 **示例:**
 
 ```
-console.log(tools.getRawType(123)) // Number
+console.log(getRawType(123)) // Number
 ```
 
 ### isStatic()
@@ -404,7 +441,7 @@ console.log(tools.getRawType(123)) // Number
 **示例:**
 
 ```
-console.log(tools.isStatic(123)) // true
+console.log(isStatic(123)) // true
 ```
 
 ### unique()
@@ -419,47 +456,12 @@ console.log(tools.isStatic(123)) // true
 
 ```
 const a = [1, 1, 2]
-console.log(tools.unique(a)) // [1, 2]
-```
-
-### disableCopySelection()
-
-禁用浏览器右键部分功能
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  type | false  | 'all'、'contextmenu'、'selectstart' 、'copy' | 类型（all：禁止右键，选择文本，contextmenu: 禁止右键 selectstart：禁止选择文本 copy: 禁止复制）（后续维护增加） |
-
-**示例:**
-
-```
-console.log(tools.disableCopySelection())
-```
-
-### viewWebPagePerformance()
-
-检查网页性能
-
-**示例:**
-
-```
-console.log(tools.disableCopySelection())
-/*DNS查询耗时 ：0ms
-index.ts:224 TCP链接耗时 ：0ms
-index.ts:225 request请求耗时 ：1ms
-index.ts:226 解析dom树耗时 ：562ms
-index.ts:227 白屏时间 ：310ms
-index.ts:228 domready时间 ：402ms
-index.ts:229 onload时间 ：964ms
-index.ts:233 js内存使用占比 ：89.72%
-client:52 [WDS] Live Reloading enabled.*/
+console.log(unique(a)) // [1, 2]
 ```
 
 # 正则校验模块
 
 这是一个包含大部分常用的正则表达式库
-
-`import { check } from 'js-hodgepodge'`
 
 ### API介绍
 
@@ -470,16 +472,17 @@ client:52 [WDS] Live Reloading enabled.*/
 **示例**
 
 ```
-console.log(check.checkPhone(13428052268)) // true
-console.log(check.checkPhone(11111111111)) // false
+console.log(checkPhone(13428052268)) // true
+console.log(checkPhone(11111111111)) // false
 ```
+
 ### checkEmail()
 
 **示例**
 
 ```
-console.log(check.checkEmail('272781702@qq.com')) // true
-console.log(check.checkEmail(1111)) // false
+console.log(checkEmail('272781702@qq.com')) // true
+console.log(checkEmail(1111)) // false
 ```
 
 ### checkUrl()
@@ -489,8 +492,8 @@ console.log(check.checkEmail(1111)) // false
 **示例**
 
 ```
-console.log(check.checkUrl('http://www.baodu.com')) // true
-console.log(check.checkUrl('http:www.baodu.com')) // false
+console.log(checkUrl('http://www.baodu.com')) // true
+console.log(checkUrl('http:www.baodu.com')) // false
 ```
 
 ### checkDomesticTelephone()
@@ -500,8 +503,8 @@ console.log(check.checkUrl('http:www.baodu.com')) // false
 **示例**
 
 ```
-console.log(check.checkDomesticTelephone('0752-89915876')) // true
-console.log(check.checkDomesticTelephone('111111')) // false
+console.log(checkDomesticTelephone('0752-89915876')) // true
+console.log(checkDomesticTelephone('111111')) // false
 ```
 
 ### checkNotSpecial()
@@ -517,12 +520,12 @@ console.log(check.checkDomesticTelephone('111111')) // false
 **示例**
 
 ```
-console.log(check.checkNotSpecial({
+console.log(checkNotSpecial({
 start: 8,
 end: 10,
 val: 'Ab12345678'
 })) // true
-console.log(check.checkNotSpecial({
+console.log(checkNotSpecial({
 start: 8,
 end: 10,
 val: 'A12345'
@@ -542,12 +545,12 @@ val: 'A12345'
 **示例**
 
 ```
-console.log(check.checkPasswordSpecification({
+console.log(checkPasswordSpecification({
 start: 8,
 end: 10,
 val: 'Ab12345678'
 })) // true
-console.log(check.checkPasswordSpecification({
+console.log(checkPasswordSpecification({
 start: 8,
 end: 10,
 val: '12345A'
@@ -561,8 +564,8 @@ val: '12345A'
 **示例**
 
 ```
-console.log(check.checkNumberUnderscoreletter('123A')) // true
-console.log(check.checkNumberUnderscoreletter('12~~')) // false
+console.log(checkNumberUnderscoreletter('123A')) // true
+console.log(checkNumberUnderscoreletter('12~~')) // false
 ```
 
 ### checkChineseNumberEnglishUnderline()
@@ -572,8 +575,8 @@ console.log(check.checkNumberUnderscoreletter('12~~')) // false
 **示例**
 
 ```
-console.log(check.checkChineseNumberEnglishUnderline('我是_SHAN')) // true
-console.log(check.checkChineseNumberEnglishUnderline('我是~~~')) // false
+console.log(checkChineseNumberEnglishUnderline('我是_SHAN')) // true
+console.log(checkChineseNumberEnglishUnderline('我是~~~')) // false
 ```
 
 ### checkSpecialCharacters()
@@ -583,8 +586,8 @@ console.log(check.checkChineseNumberEnglishUnderline('我是~~~')) // false
 **示例**
 
 ```
-console.log(check.checkSpecialCharacters('我是Shan')) // true
-console.log(check.checkSpecialCharacters('我是_SHAN')) // false
+console.log(checkSpecialCharacters('我是Shan')) // true
+console.log(checkSpecialCharacters('我是_SHAN')) // false
 ```
 
 ### checkHtml()
@@ -594,8 +597,8 @@ console.log(check.checkSpecialCharacters('我是_SHAN')) // false
 **示例**
 
 ```
-console.log(check.checkHtml('<body></body>')) // true
-console.log(check.checkHtml('body />')) // false
+console.log(checkHtml('<body></body>')) // true
+console.log(checkHtml('body />')) // false
 ```
 
 ### checkDChineseCharacterDetection()
@@ -605,8 +608,8 @@ console.log(check.checkHtml('body />')) // false
 **示例**
 
 ```
-console.log(check.checkDChineseCharacterDetection('我是')) // true
-console.log(check.checkDChineseCharacterDetection('Shan')) // false
+console.log(checkDChineseCharacterDetection('我是')) // true
+console.log(checkDChineseCharacterDetection('Shan')) // false
 ```
 
 ### checkQQ()
@@ -616,8 +619,8 @@ console.log(check.checkDChineseCharacterDetection('Shan')) // false
 **示例**
 
 ```
-console.log(check.checkQQ(100000)) // true
-console.log(check.checkQQ(10000000000000000000000)) // false
+console.log(checkQQ(100000)) // true
+console.log(checkQQ(10000000000000000000000)) // false
 ```
 
 ### checkPostOffice()
@@ -627,8 +630,8 @@ console.log(check.checkQQ(10000000000000000000000)) // false
 **示例**
 
 ```
-console.log(check.checkPostOffice(516300)) // true
-console.log(check.checkPostOffice(10000000000000000000000)) // false
+console.log(checkPostOffice(516300)) // true
+console.log(checkPostOffice(10000000000000000000000)) // false
 ```
 
 ### checkDateFormat()
@@ -638,8 +641,8 @@ console.log(check.checkPostOffice(10000000000000000000000)) // false
 **示例**
 
 ```
-console.log(check.checkDateFormat('2020-6-03')) // true
-console.log(check.checkDateFormat('http:www.baodu.com')) // false
+console.log(checkDateFormat('2020-6-03')) // true
+console.log(checkDateFormat('http:www.baodu.com')) // false
 ```
 
 ### checkLowerCase()
@@ -649,8 +652,8 @@ console.log(check.checkDateFormat('http:www.baodu.com')) // false
 **示例**
 
 ```
-console.log(check.checkLowerCase('abc')) // true
-console.log(check.checkLowerCase('ABC')) // false
+console.log(checkLowerCase('abc')) // true
+console.log(checkLowerCase('ABC')) // false
 ```
 
 ### checkUpperCase()
@@ -660,8 +663,8 @@ console.log(check.checkLowerCase('ABC')) // false
 **示例**
 
 ```
-console.log(check.checkUpperCase('ABC')) // true
-console.log(check.checkUpperCase('abc')) //false
+console.log(checkUpperCase('ABC')) // true
+console.log(checkUpperCase('abc')) //false
 ```
 
 ### checkAlphabets()
@@ -671,8 +674,8 @@ console.log(check.checkUpperCase('abc')) //false
 **示例**
 
 ```
-console.log(check.checkAlphabets('ABCa')) // true
-console.log(check.checkAlphabets('abcA121')) //false
+console.log(checkAlphabets('ABCa')) // true
+console.log(checkAlphabets('abcA121')) //false
 ```
 
 ### checkCID()
@@ -682,8 +685,8 @@ console.log(check.checkAlphabets('abcA121')) //false
 **示例**
 
 ```
-console.log(check.checkCID(110101199003077475)) // true
-console.log(check.checkCID(1101111111111111111111)) // false
+console.log(checkCID(110101199003077475)) // true
+console.log(checkCID(1101111111111111111111)) // false
 ```
 
 ### checkStrComposedOfNumber()
@@ -693,8 +696,8 @@ console.log(check.checkCID(1101111111111111111111)) // false
 **示例**
 
 ```
-console.log(check.checkStrComposedOfNumber('11111')) // true
-console.log(check.checkStrComposedOfNumber('abc')) // false
+console.log(checkStrComposedOfNumber('11111')) // true
+console.log(checkStrComposedOfNumber('abc')) // false
 ```
 
 ### checkNumberLength()
@@ -709,11 +712,11 @@ console.log(check.checkStrComposedOfNumber('abc')) // false
 **示例**
 
 ```
-console.log(check.checkNumberLength({
+console.log(checkNumberLength({
 length: 6,
 val: '123456'
 })) // true
-console.log(check.checkNumberLength({
+console.log(checkNumberLength({
 length: 5,
 val: '12354666'
 })) // false
@@ -732,12 +735,12 @@ val: '12354666'
 **示例**
 
 ```
-console.log(check.checkAppointLen({
+console.log(checkAppointLen({
 start: 6,
 end: 8,
 val: '123456'
 })) // true
-console.log(check.checkAppointLen({start: 6,
+console.log(checkAppointLen({start: 6,
 end: 8,
 val: '1235466634214'
 })) // false
@@ -750,8 +753,8 @@ val: '1235466634214'
 **示例**
 
 ```
-console.log(check.checkZeroAndNonZero('123245')) // true
-console.log(check.checkZeroAndNonZero('012345')) // false
+console.log(checkZeroAndNonZero('123245')) // true
+console.log(checkZeroAndNonZero('012345')) // false
 ```
 
 ### checkTwoDecimalplaces()
@@ -761,8 +764,8 @@ console.log(check.checkZeroAndNonZero('012345')) // false
 **示例**
 
 ```
-console.log(check.checkTwoDecimalplaces(123245.00)) // true
-console.log(check.checkTwoDecimalplaces('012345')) // false
+console.log(checkTwoDecimalplaces(123245.00)) // true
+console.log(checkTwoDecimalplaces('012345')) // false
 ```
 
 ### checkDecimalplaces()
@@ -772,8 +775,8 @@ console.log(check.checkTwoDecimalplaces('012345')) // false
 **示例**
 
 ```
-console.log(check.checkDecimalplaces(123245.12)) // true
-console.log(check.checkDecimalplaces(12323.123)) // false
+console.log(checkDecimalplaces(123245.12)) // true
+console.log(checkDecimalplaces(12323.123)) // false
 ```
 
 ### checkPND()
@@ -783,8 +786,8 @@ console.log(check.checkDecimalplaces(12323.123)) // false
 **示例**
 
 ```
-console.log(check.checkPND(123245)) // true
-console.log(check.checkPND(';asda')) // false
+console.log(checkPND(123245)) // true
+console.log(checkPND(';asda')) // false
 ```
 
 ### checkPositiveTDP()
@@ -794,8 +797,8 @@ console.log(check.checkPND(';asda')) // false
 **示例**
 
 ```
-console.log(check.checkPositiveTDP(123245.12)) // true
-console.log(check.checkPositiveTDP(-123.12)) // false
+console.log(checkPositiveTDP(123245.12)) // true
+console.log(checkPositiveTDP(-123.12)) // false
 ```
 ### checkOandTPositive()
 
@@ -804,8 +807,8 @@ console.log(check.checkPositiveTDP(-123.12)) // false
 **示例**
 
 ```
-console.log(check.checkOandTPositive(123245.12)) // true
-console.log(check.checkOandTPositive(-123.12)) // false
+console.log(checkOandTPositive(123245.12)) // true
+console.log(checkOandTPositive(-123.12)) // false
 ```
 ### checkNonzeroPositive()
 
@@ -814,8 +817,8 @@ console.log(check.checkOandTPositive(-123.12)) // false
 **示例**
 
 ```
-console.log(check.checkNonzeroPositive(123245)) // true
-console.log(check.checkNonzeroPositive(-123.12)) // false
+console.log(checkNonzeroPositive(123245)) // true
+console.log(checkNonzeroPositive(-123.12)) // false
 ```
 ### checkNotPositive()
 
@@ -836,8 +839,8 @@ console.log(check.checkNonzeroPositive(-123.12)) // false
 **示例**
 
 ```
-console.log(check.checkNonzeroNegative(-123245)) // true
-console.log(check.checkNonzeroNegative(123)) // false
+console.log(checkNonzeroNegative(-123245)) // true
+console.log(checkNonzeroNegative(123)) // false
 ```
 ### checkNotNegative()
 
@@ -857,9 +860,7 @@ console.log(check.checkNonzeroNegative(123)) // false
 
 # 缓存模块
 
-这是一个包含大部分常用的正则表达式库
-
-`import { cache } from 'js-hodgepodge'`
+分为cooick操作以及localStorage操作
 
 ### API介绍
 
@@ -886,8 +887,9 @@ setLocalStorage('down', 60, 24*60*60*1000)
 |  key | true  | number |  键值 |
 
 ```
-setLocalStorage('down') // 60
+getLocalStorage('down')
 ```
+
 ### removeLocalStorage()
 
 删除storage缓存
@@ -900,4 +902,41 @@ setLocalStorage('down') // 60
 removeLocalStorage('down')
 ```
 
-### 未完待续。。。。
+### setCooick()
+
+设置cooick 
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+|  val | true  | any |  值 |
+|  attributes | false  | any | 其他属性，如：加域名范围 |
+
+```
+setCooick('down')
+```
+
+### getCooick()
+
+获取cooick
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+
+```
+getCooick('down')
+```
+
+### removeCooick()
+
+删除cooick
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+|  attributes | false  | any | 其他属性，如：加域名范围 |
+
+```
+removeCooick('down')
+```

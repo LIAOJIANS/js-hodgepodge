@@ -1,9 +1,9 @@
-import { convertTimestamps, dateUniFormat, parseNumber, timeFormat, timeSpanPositioning } from '../utils/dataUtils';
-import { ErrorMsg, logError } from '../utils/Error';
-import typeOf from '../utils/typeOf';
+import { convertTimestamps, dateUniFormat, parseNumber, timeSpanPositioning } from '../utils/dataUtils';
+import { logError } from '../utils/Error';
+import typeOf from './typeOf';
 import decopy from './decopy';
 
-interface TimeFormal {
+export interface TimeFormal {
   startTime: number | string | Date
   endTime?: number | string | Date
   type?:
@@ -16,9 +16,9 @@ interface TimeFormal {
   | 'timeHours'
   | 'timeHoursMinutes'
 }
-type TimeOptionsFunc = (options: TimeFormal) => string | null
+export type TimeOptionsFunc = (options: TimeFormal) => string | null
 
-type dateType = (date: number | string | null) => string | null
+export type dateType = (date: number | string | null) => string | null
 
 /**
  * 计算星座

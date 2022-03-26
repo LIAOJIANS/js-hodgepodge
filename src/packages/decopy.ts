@@ -1,10 +1,10 @@
-import typeOf from "../utils/typeOf"
+import typeOf from "./typeOf"
 
 // 深拷贝
-export default function decopy<T>(data: T): T {
+export function decopy<T>(data: T): T {
   let val = data as any
 
-  switch(typeOf(val)) {
+  switch (typeOf(val)) {
     case 'array':
       return val.map((c: any) => decopy(c))
     case 'object':
@@ -16,7 +16,7 @@ export default function decopy<T>(data: T): T {
       const newDate = new Date()
       newDate.setTime(val.getTime())
       return newDate as any
-    
+
     case 'regExp':
       let pattern = val.valueOf()
       let flags = ''
@@ -30,3 +30,5 @@ export default function decopy<T>(data: T): T {
       return val
   }
 }
+
+export default decopy

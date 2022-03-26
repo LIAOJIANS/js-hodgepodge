@@ -1,103 +1,201 @@
-import cache, { 
-  setCooick,
+
+/* -------------------------- UTILS ---------------------------- */
+import {
+  throttle,
+  debounce,
+  delay,
+  getUrlKey,
+  getRawType,
+  cached,
+  capitalize,
+  isStatic,
+  unique,
+
+  tasInterface
+} from './packages/utils'
+
+
+/* --------------------------- cooick ----------------------------- */
+
+import {
   getCooick,
+  setCooick,
   removeCooick,
+} from './packages/cooick'
+
+
+/* --------------------------- localStorage ----------------------------- */
+
+import {
   setLocalStorage,
   getLocalStorage,
-  removeLocalStorage
-} from 'js-hodgepodge/cache'
+  removeLocalStorage,
+} from './packages/localStorage'
 
-import decopy from 'js-hodgepodge/decopy'
 
-import regExp from 'js-hodgepodge/regExp'
+/* --------------------------- typeOf ----------------------------- */
+import { typeOf } from './packages/typeOf'
 
-export const cooick = {
-  setCooick,
+
+/* --------------------------- clipboard ----------------------------- */
+import { clipboard } from './packages/clipboard'
+
+
+/* --------------------------- decopy ----------------------------- */ 
+import { decopy } from './packages/decopy'
+
+
+/* --------------------------- regExp ----------------------------- */
+import {
+  checkAlphabets,
+  checkAppointLen,
+  checkCID,
+  checkChineseNumberEnglishUnderline,
+  checkDChineseCharacterDetection,
+  checkDateFormat,
+  checkDecimalplaces,
+  checkDomesticTelephone,
+  checkEmail,
+  checkFloat,
+  checkHtml,
+  checkIP,
+  checkLowerCase,
+  checkNegativeFloat,
+  checkNonzeroNegative,
+  checkNonzeroPositive,
+  checkNotNegative,
+  checkNotNegativeFloat,
+  checkNotPositive,
+  checkNotPositiveFloat,
+  checkNotSpecial,
+  checkNumberLength,
+  checkNumberUnderscoreletter,
+  checkOandTPositive,
+  checkPND,
+  checkPasswordSpecification,
+  checkPhone,
+  checkPositiveFloat,
+  checkPositiveTDP,
+  checkPostOffice,
+  checkQQ,
+  checkSpecialCharacters,
+  checkStrComposedOfNumber,
+  checkTwoDecimalplaces,
+  checkUpperCase,
+  checkUrl,
+  checkZeroAndNonZero,
+
+  interCheck,
+  superInterCheck,
+  appointLenInterCheck,
+  appointLen,
+  optionsInter
+} from './packages/regExp'
+
+
+/* --------------------------- dete ----------------------------- */
+import {
+  getAfterCountDays,
+  getFirstDayOfSeason,
+  getHoroscope,
+  getTime,
+  getLastDayOfMonth,
+  getWeek,
+  getYearDay,
+  getYearWeek,
+  dateDifference,
+  dateFormat,
+  remainderTime,
+
+
+  TimeOptionsFunc,
+  dateType,
+  TimeFormal
+
+} from './packages/date'
+
+export {
+  decopy,
+
+  throttle,
+  debounce,
+  delay,
+  getUrlKey,
+  getRawType,
+  cached,
+  capitalize,
+  isStatic,
+  unique,
+
+  tasInterface,
+
   getCooick,
-  removeCooick
-}
+  setCooick,
+  removeCooick,
 
-export const storage = {
   setLocalStorage,
   getLocalStorage,
-  removeLocalStorage
+  removeLocalStorage,
+
+  typeOf,
+  clipboard,
+
+  checkAlphabets,
+  checkAppointLen,
+  checkCID,
+  checkChineseNumberEnglishUnderline,
+  checkDChineseCharacterDetection,
+  checkDateFormat,
+  checkDecimalplaces,
+  checkDomesticTelephone,
+  checkEmail,
+  checkFloat,
+  checkHtml,
+  checkIP,
+  checkLowerCase,
+  checkNegativeFloat,
+  checkNonzeroNegative,
+  checkNonzeroPositive,
+  checkNotNegative,
+  checkNotNegativeFloat,
+  checkNotPositive,
+  checkNotPositiveFloat,
+  checkNotSpecial,
+  checkNumberLength,
+  checkNumberUnderscoreletter,
+  checkOandTPositive,
+  checkPND,
+  checkPasswordSpecification,
+  checkPhone,
+  checkPositiveFloat,
+  checkPositiveTDP,
+  checkPostOffice,
+  checkQQ,
+  checkSpecialCharacters,
+  checkStrComposedOfNumber,
+  checkTwoDecimalplaces,
+  checkUpperCase,
+  checkUrl,
+  checkZeroAndNonZero,
+
+  getAfterCountDays,
+  getFirstDayOfSeason,
+  getHoroscope,
+  getTime,
+  getLastDayOfMonth,
+  getWeek,
+  getYearDay,
+  getYearWeek,
+  dateDifference,
+  dateFormat,
+  remainderTime,
+
+  TimeOptionsFunc,
+  dateType,
+  TimeFormal,
+  interCheck,
+  superInterCheck,
+  appointLenInterCheck,
+  appointLen,
+  optionsInter
 }
-
-
-export default {
-  ...cache,
-  ...regExp,
-  regExp,
-  decopy
-}
-
-
-
-// setLocalStorage()
-
-
-// console.log(getLocalStorage('token'));
-
-// console.log(setCooick('token', '111111'));
-
-// console.log(removeCooick('token'));
-
-// getCooick()
-
-// console.log(check.checkPhone(13428052268)) // true
-// console.log(check.checkPhone(11111111111)) // false
-//
-// console.log(check.checkEmail('272781702@qq.com')) // true
-// console.log(check.checkEmail(1111))
-//
-// console.log(check.checkUrl('http://www.baodu.com')) // true
-// console.log(check.checkUrl('http:www.baodu.com')) // false
-//
-//
-// console.log(check.checkNotSpecial({
-//   start: 8,
-//   end: 10,
-//   val: 'Ab12345678'
-// }))
-// console.log(check.checkNotSpecial({
-//   start: 8,
-//   end: 10,
-//   val: 'Ab12345'
-// }))
-
-// console.log(check.checkNonzeroNegative(-123245)) // true
-// console.log(check.checkNonzeroNegative(123)) // false
-
-
-// let count = 0
-// // @ts-ignore
-// window.addEventListener('scroll', tools.throttle((a = 2, b = 3) => {
-//   console.log('count' + count, ' 参数a '+ 2 , ' 参数b '+ 3)
-//   count += 1
-// }, 350))
-//
-// // @ts-ignore
-
-
-// let count = 5
-// // @ts-ignore
-// document.querySelector('.btn').addEventListener('click', function () {
-//   // @ts-ignore
-//   tools.cached(res => {
-//     count += 5
-//     console.log('res' + res) // 旧值
-//     console.log('count' + count) // 新值
-//   })(count)
-
-// })
-
-// console.log(tools.getExplorerInfo()) // {type: "Chrome", version: 78}
-
-// const a = [1, 1, 2]
-// console.log(tools.unique(a)) // [1, 2]
-
-// // @ts-ignore
-// console.log(tools.viewWebPagePerformance())
-
-
-

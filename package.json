@@ -1,8 +1,8 @@
 {
   "name": "js-hodgepodge",
-  "version": "1.1.0",
-  "description": "",
-  "main": "./dist/index.js",
+  "version": "1.2.1",
+  "description": "修复部分Bug，完善文档",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js",

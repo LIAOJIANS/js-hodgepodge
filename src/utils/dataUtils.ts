@@ -1,5 +1,5 @@
 import { logError } from "./Error";
-import typeOf from "./typeOf";
+import typeOf from "../packages/typeOf";
 
 /*
   * 给双位数补0
@@ -38,7 +38,6 @@ function convertTimestamps(time: string): number | null {
   }
 
 }
-
 function dateUniFormat<T extends string | number | Date>(date: T): T | null {
   if(
     ['string', 'date', 'number'].indexOf(<string>typeOf(date)) === -1

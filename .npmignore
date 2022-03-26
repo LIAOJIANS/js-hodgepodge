@@ -1,5 +1,6 @@
 /build/
 .gitignore
 .idea
-/src/config/
-/src/template/
+.package-lock.json
+.tsconfig.json
+/src/
