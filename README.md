@@ -13,6 +13,257 @@
 
 `import {...方法名} from 'js-hodgepodge'`
 
+# 常用的工具函数模块
+
+这是一个开发常用的工具函数库
+
+### API介绍
+
+### throttle()
+
+一个节流函数
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  func | true  | function | 执行后的回调 |
+|  awai | false  | number |  间距时间ms，不传默认200 |
+
+**示例:**
+
+```
+/* 向下滚动时，每隔350ms打印出 count count + 1  参数a 2  参数b 3 */
+let count = 0
+window.addEventListener('scroll', throttle((a = 2, b = 3) => {
+console.log('count' + count, ' 参数a '+ 2 , ' 参数b '+ 3)
+count += 1
+}, 350))
+```
+
+### debounce()
+
+一个防抖函数
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  func | true  | function | 执行后的回调 |
+|  awai | false  | number |  间距时间ms，不传默认200 |
+
+**示例:**
+
+```
+/* 无间断点击时，会在350MS执行后执行最后一次点击 */
+document.querySelector('.btn').addEventListener('click', debounce(() => {
+console.log('调用API')
+}, 350))
+
+```
+
+### clipboard()
+
+点击复制内容
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  text | false  | any | 文本内容 |
+|  target | false  | Element | 复制目标元素（复制他里的innerText） |
+
+**示例:**
+
+```
+clipboard('啦啦啦')
+
+function elementP() {
+    const el = document.createElement('p')
+    el.innerText = '啦啦啦'
+    return p
+}
+
+document.querySelector('body').appendChild(elementP())
+
+clipboard(null, elementP())
+
+```
+
+### decopy()
+
+从根源上的深拷贝
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  data | true  | any | 拷贝的内容 |
+
+**示例:**
+
+```
+decopy({})
+```
+
+### typeOf()
+
+获取类型
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  target | true  | any | 查询的目标 |
+
+**示例:**
+
+```
+typeOf({}) // object
+```
+
+### getUrlKey()
+
+获取当前路由参数上的地址
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  name | true  | string | 地址上的参数值 |
+
+**示例:**
+
+```
+/* 假设当前网址为 'http://127.0.0.1:8080/public/myBlog/bolgInfo?code=1321321321' */
+
+create() {
+const code = getUrlKey('code') // 1321321321
+}
+```
+
+### isObjectLike()
+
+断数据是不是Object类型的数据
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  val | true  | any | 目标参数 |
+
+**示例:**
+
+```
+let obj = {}
+console.log(isObjectLike(obj)) // true
+let obj = ''
+console.log(isObjectLike(obj)) // false
+```
+### cached()
+
+记忆函数：缓存函数的运算结果
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  fn | true  | function | 回调函数 |
+
+**示例:**
+
+```
+let count = 5
+document.querySelector('.btn').addEventListener('click', function () {
+cached(res => {
+count += 5
+console.log('res' + res) // 旧值 5
+console.log('count' + count) // 新值 10
+})(count)
+})
+```
+
+### capitalize()
+
+把字符串首位转为大写
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  val | true  | string | 目标参数 |
+
+**示例:**
+
+```
+console.log(capitalize('abcd')) // Abcd
+```
+
+# 缓存模块
+
+分为cooick操作以及localStorage操作
+
+### API介绍
+
+### setLocalStorage()
+
+存入storage缓存，让storage有时间概念
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+|  value | true  | any |  值 |
+|  distance | true  | number |  时间间距，存多久 |
+
+```
+setLocalStorage('down', 60, 24*60*60*1000)
+```
+
+### getLocalStorage()
+
+取出缓存
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+
+```
+getLocalStorage('down')
+```
+
+### removeLocalStorage()
+
+删除storage缓存
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+
+```
+removeLocalStorage('down')
+```
+
+### setCooick()
+
+设置cooick 
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+|  val | true  | any |  值 |
+|  attributes | false  | any | 其他属性，如：加域名范围 |
+
+```
+setCooick('down')
+```
+
+### getCooick()
+
+获取cooick
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+
+```
+getCooick('down')
+```
+
+### removeCooick()
+
+删除cooick
+
+| param  |  required | type  | describe  |
+| ------------ | ------------ | ------------ | ------------ |
+|  key | true  | number |  键值 |
+|  attributes | false  | any | 其他属性，如：加域名范围 |
+
+```
+removeCooick('down')
+```
+
 # Date模块
 
 这是一个包含大部分开发需要用到的时间模块，包括时间格式，引入如下：
@@ -235,174 +486,6 @@ console.log('是否是'+ new Date().getDay +'区间' + isExist({
 lastTime: 1587360400,
 time: 1589963293
 })) // 是否是2020-06-03 上午 10:56区间true
-```
-
-# 常用的工具函数模块
-
-这是一个开发常用的工具函数库
-
-### API介绍
-
-### throttle()
-
-一个节流函数
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  func | true  | function | 执行后的回调 |
-|  awai | false  | number |  间距时间ms，不传默认200 |
-
-**示例:**
-
-```
-/* 向下滚动时，每隔350ms打印出 count count + 1  参数a 2  参数b 3 */
-let count = 0
-window.addEventListener('scroll', throttle((a = 2, b = 3) => {
-console.log('count' + count, ' 参数a '+ 2 , ' 参数b '+ 3)
-count += 1
-}, 350))
-```
-
-### debounce()
-
-一个防抖函数
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  func | true  | function | 执行后的回调 |
-|  awai | false  | number |  间距时间ms，不传默认200 |
-
-**示例:**
-
-```
-/* 无间断点击时，会在350MS执行后执行最后一次点击 */
-document.querySelector('.btn').addEventListener('click', debounce(() => {
-console.log('调用API')
-}, 350))
-
-```
-
-### clipboard()
-
-点击复制内容
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  text | false  | any | 文本内容 |
-|  target | false  | Element | 复制目标元素（复制他里的innerText） |
-
-**示例:**
-
-```
-clipboard('啦啦啦')
-
-function elementP() {
-    const el = document.createElement('p')
-    el.innerText = '啦啦啦'
-    return p
-}
-
-document.querySelector('body').appendChild(elementP())
-
-clipboard(null, elementP())
-
-```
-
-### decopy()
-
-从根源上的深拷贝
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  data | true  | any | 拷贝的内容 |
-
-**示例:**
-
-```
-decopy({})
-```
-
-### typeOf()
-
-获取类型
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  target | true  | any | 查询的目标 |
-
-**示例:**
-
-```
-typeOf({}) // object
-```
-
-### getUrlKey()
-
-获取当前路由参数上的地址
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  name | true  | string | 地址上的参数值 |
-
-**示例:**
-
-```
-/* 假设当前网址为 'http://127.0.0.1:8080/public/myBlog/bolgInfo?code=1321321321' */
-
-create() {
-const code = getUrlKey('code') // 1321321321
-}
-```
-
-### isObjectLike()
-
-断数据是不是Object类型的数据
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | any | 目标参数 |
-
-**示例:**
-
-```
-let obj = {}
-console.log(isObjectLike(obj)) // true
-let obj = ''
-console.log(isObjectLike(obj)) // false
-```
-### cached()
-
-记忆函数：缓存函数的运算结果
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  fn | true  | function | 回调函数 |
-
-**示例:**
-
-```
-let count = 5
-document.querySelector('.btn').addEventListener('click', function () {
-cached(res => {
-count += 5
-console.log('res' + res) // 旧值 5
-console.log('count' + count) // 新值 10
-})(count)
-})
-```
-
-### capitalize()
-
-把字符串首位转为大写
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | string | 目标参数 |
-
-**示例:**
-
-```
-console.log(capitalize('abcd')) // Abcd
 ```
 
 ### getExplorerInfo()
@@ -857,86 +940,3 @@ console.log(checkNonzeroNegative(123)) // false
 ### checkFloat()
 
 负浮点数
-
-# 缓存模块
-
-分为cooick操作以及localStorage操作
-
-### API介绍
-
-### setLocalStorage()
-
-存入storage缓存，让storage有时间概念
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  value | true  | any |  值 |
-|  distance | true  | number |  时间间距，存多久 |
-
-```
-setLocalStorage('down', 60, 24*60*60*1000)
-```
-
-### getLocalStorage()
-
-取出缓存
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-
-```
-getLocalStorage('down')
-```
-
-### removeLocalStorage()
-
-删除storage缓存
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-
-```
-removeLocalStorage('down')
-```
-
-### setCooick()
-
-设置cooick 
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  val | true  | any |  值 |
-|  attributes | false  | any | 其他属性，如：加域名范围 |
-
-```
-setCooick('down')
-```
-
-### getCooick()
-
-获取cooick
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-
-```
-getCooick('down')
-```
-
-### removeCooick()
-
-删除cooick
-
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  attributes | false  | any | 其他属性，如：加域名范围 |
-
-```
-removeCooick('down')
-```
