@@ -1,9 +1,20 @@
-export const clipboard = (
-  text?: string,
+import { logError } from "../utils/Error";
+import typeOf from "./typeOf";
+
+export const clipboard = ({
+  text,
+  target
+}: {
+  text?: string | number,
   target?: HTMLElement
-) => {
-  if (!text && !!target) {
+}) => {
+
+  if (!text && !target) {
     return;
+  }
+
+  if(!!text && !['number', 'string'].includes(typeOf(text)!)) {
+    return logError(`You cannot pass in anything other than number and string! var text type is ${ typeOf(text) }`)
   }
 
   const input = document.createElement("input");
@@ -18,7 +29,7 @@ export const clipboard = (
 
   document.body.appendChild(input);
 
-  input.value = !!text ? text : target!.innerText;
+  input.value = (!!text ? text : target!.innerText) as string;
   input.select();
   document.execCommand("copy");
 

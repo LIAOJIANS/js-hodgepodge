@@ -1,6 +1,6 @@
 {
   "name": "js-hodgepodge",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "description": "修复部分Bug，完善文档",
   "main": "./lib/index.js",
   "scripts": {

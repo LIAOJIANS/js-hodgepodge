@@ -199,3 +199,84 @@ export {
   appointLen,
   optionsInter
 }
+
+export default {
+  decopy,
+
+  throttle,
+  debounce,
+  delay,
+  getUrlKey,
+  getRawType,
+  cached,
+  capitalize,
+  isStatic,
+  unique,
+
+  getCooick,
+  setCooick,
+  removeCooick,
+
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+
+  typeOf,
+  clipboard,
+
+  checkAlphabets,
+  checkAppointLen,
+  checkCID,
+  checkChineseNumberEnglishUnderline,
+  checkDChineseCharacterDetection,
+  checkDateFormat,
+  checkDecimalplaces,
+  checkDomesticTelephone,
+  checkEmail,
+  checkFloat,
+  checkHtml,
+  checkIP,
+  checkLowerCase,
+  checkNegativeFloat,
+  checkNonzeroNegative,
+  checkNonzeroPositive,
+  checkNotNegative,
+  checkNotNegativeFloat,
+  checkNotPositive,
+  checkNotPositiveFloat,
+  checkNotSpecial,
+  checkNumberLength,
+  checkNumberUnderscoreletter,
+  checkOandTPositive,
+  checkPND,
+  checkPasswordSpecification,
+  checkPhone,
+  checkPositiveFloat,
+  checkPositiveTDP,
+  checkPostOffice,
+  checkQQ,
+  checkSpecialCharacters,
+  checkStrComposedOfNumber,
+  checkTwoDecimalplaces,
+  checkUpperCase,
+  checkUrl,
+  checkZeroAndNonZero,
+
+  getAfterCountDays,
+  getFirstDayOfSeason,
+  getHoroscope,
+  getTime,
+  getLastDayOfMonth,
+  getWeek,
+  getYearDay,
+  getYearWeek,
+  dateDifference,
+  dateFormat,
+  remainderTime
+}
+
+
+// console.log();
+
+removeCooick('text')
+

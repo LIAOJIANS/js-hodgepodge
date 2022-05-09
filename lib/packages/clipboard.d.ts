@@ -1,2 +1,5 @@
-export declare const clipboard: (text?: string | undefined, target?: HTMLElement | undefined) => void;
+export declare const clipboard: ({ text, target }: {
+    text?: string | number | undefined;
+    target?: HTMLElement | undefined;
+}) => void;
 export default clipboard;

@@ -19,7 +19,8 @@ module.exports = {
   mode: process.env.NODE_ENV,
   output: {
     filename: "[name].js",
-    path: path('lib')
+    path: path('lib'),
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],

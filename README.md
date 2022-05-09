@@ -64,14 +64,16 @@ console.log('调用API')
 
 | param  |  required | type  | describe  |
 | ------------ | ------------ | ------------ | ------------ |
-|  text | false  | any | 文本内容 |
+|  text | false  | string、number | 文本内容 |
 |  target | false  | Element | 复制目标元素（复制他里的innerText） |
 
 **示例:**
 
 ```
-clipboard('啦啦啦')
+// 方式一
+clipboard({ text: '啦啦啦 })
 
+// 方式二（复制dom的文本内容）
 function elementP() {
     const el = document.createElement('p')
     el.innerText = '啦啦啦'
@@ -80,7 +82,9 @@ function elementP() {
 
 document.querySelector('body').appendChild(elementP())
 
-clipboard(null, elementP())
+clipboard({
+    target: 'elementP()'
+})
 
 ```
 
