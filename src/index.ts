@@ -11,7 +11,8 @@ import {
   isStatic,
   unique,
 
-  tasInterface
+  tasInterface,
+  recomArrs
 } from './packages/utils'
 
 
@@ -126,6 +127,7 @@ export {
   capitalize,
   isStatic,
   unique,
+  recomArrs,
 
   tasInterface,
 
@@ -274,9 +276,3 @@ export default {
   dateFormat,
   remainderTime
 }
-
-
-// console.log();
-
-removeCooick('text')
-

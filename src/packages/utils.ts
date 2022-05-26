@@ -86,3 +86,30 @@ export const unique = <T extends number[]>(arr: T) => {
   })
   return resultArr
 }
+
+
+// 一维数组转为二维指定长度的数组
+export const recomArrs = <T>(
+  data: any[] | T[],
+  dim?: number
+): Array<T> => {
+
+  if(!dim) { 
+    dim = 2 
+  }
+
+  const arr = new Array(Math.ceil(data.length / dim)).fill([])
+  
+  let index = 0
+  data.forEach((c, i) => {
+    arr[index] = [
+      ...arr[index],
+      c
+    ]
+    if ((i + 1) % dim! === 0) {
+      index += 1
+    }
+  })
+
+  return arr
+}

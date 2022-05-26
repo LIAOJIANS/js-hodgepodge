@@ -8,3 +8,4 @@ export declare const capitalize: <T extends string>(val: T) => string;
 export declare const isStatic: <T>(val: T) => boolean;
 export declare const getRawType: <T>(val: T) => string;
 export declare const unique: <T extends number[]>(arr: T) => any[];
+export declare const recomArrs: <T>(data: any[] | T[], dim?: number | undefined) => T[];
