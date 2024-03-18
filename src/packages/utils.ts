@@ -1,3 +1,5 @@
+import typeOf from "./typeOf"
+
 export type tasInterface = (func: any, aw?: number) => Function
 
 // 节流
@@ -112,4 +114,20 @@ export const recomArrs = <T>(
   })
 
   return arr
+}
+
+// 指定字符串对象、数组转为标准Json
+export const strJson = <T>(
+  str: string
+): T => {
+
+  if(typeOf(str) !== 'string') {
+    return str as any
+  }
+
+  try {
+    return JSON.parse(str)
+  } catch {
+    return (new Function(`return ${str}`)())
+  }
 }

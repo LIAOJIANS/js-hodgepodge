@@ -12,7 +12,8 @@ import {
   unique,
 
   tasInterface,
-  recomArrs
+  recomArrs,
+  strJson
 } from './packages/utils'
 
 
@@ -115,6 +116,7 @@ import {
 
 } from './packages/date'
 
+
 export {
   decopy,
 
@@ -204,7 +206,7 @@ export {
 
 export default {
   decopy,
-
+  strJson,
   throttle,
   debounce,
   delay,
