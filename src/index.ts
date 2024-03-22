@@ -19,6 +19,19 @@ import {
 } from './packages/utils'
 
 
+const dfd = defer<string>()
+
+dfd.promise.then(res => { // 状态一直是等待
+  console.log(res);
+  
+})
+setTimeout(() => {
+  console.log(dfd);
+  
+  dfd.resolve('1111')
+})
+
+
 /* --------------------------- cooick ----------------------------- */
 
 import {

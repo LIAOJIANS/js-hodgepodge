@@ -65,6 +65,29 @@ setTimeout(() => {
 
 ```
 
+### defer()
+
+统一Promise状态
+
+**示例:**
+
+```
+const dfd = defer<string>()
+
+dfd.promise.then(res => { // 状态一直是等待
+  console.log(res);
+  
+})
+setTimeout(() => {
+  console.log(dfd);
+  
+  dfd.resolve('1111')
+})
+
+
+
+```
+
 ### recomArrs()
 
 一维数组转二维多位数组

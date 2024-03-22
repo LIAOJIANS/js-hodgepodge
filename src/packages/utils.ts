@@ -189,10 +189,10 @@ export const defer: Defer = () => {
   const dfd = {} as any
 
   dfd.promise = new Promise((
-    reslove,
+    resolve,
     reject
   ) => {
-    dfd.reslove = reslove as any
+    dfd.resolve = resolve as any
     dfd.reject = reject
   })
 
