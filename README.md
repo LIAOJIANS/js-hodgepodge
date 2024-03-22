@@ -19,14 +19,60 @@
 
 ### API介绍
 
+### strJson()
+
+指定字符串对象、数组转为标准Json
+
+| param | required | type   |   describe   |
+| ----- | -------- | ------ | :----------: |
+| str   | true     | String | 需要转换字符 |
+
+**示例:**
+
+```
+const str = "{ name: '张三' }"
+
+strJson(str) // { name: '张三' }  typeof === 'object'
+```
+
+### createEventHandler()
+
+基于Window环境下的事件分发
+
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| name  | true     | String | 事件名称 |
+
+**示例:**
+
+```
+addEventListener(
+  window,
+  event => {
+    console.log(
+      event.detail // 13
+    )
+  }
+)
+
+setTimeout(() => {
+  
+  dispatch(  // 派发事件触发事件监听
+    window,
+    13
+  )
+})
+
+```
+
 ### recomArrs()
 
 一维数组转二维多位数组
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  data | true  | Array | 执行后的回调 |
-|  dim | false  | number |  子数组长度，不传默认2 |
+| param | required | type   | describe              |
+| ----- | -------- | ------ | --------------------- |
+| data  | true     | Array  | 执行后的回调          |
+| dim   | false    | number | 子数组长度，不传默认2 |
 
 **示例:**
 
@@ -40,10 +86,10 @@ recomArrs([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)  // 打印 [[1, 2, 3], [4, 5, 6], [7, 
 
 一个节流函数
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  func | true  | function | 执行后的回调 |
-|  awai | false  | number |  间距时间ms，不传默认200 |
+| param | required | type     | describe                |
+| ----- | -------- | -------- | ----------------------- |
+| func  | true     | function | 执行后的回调            |
+| awai  | false    | number   | 间距时间ms，不传默认200 |
 
 **示例:**
 
@@ -60,10 +106,10 @@ count += 1
 
 一个防抖函数
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  func | true  | function | 执行后的回调 |
-|  awai | false  | number |  间距时间ms，不传默认200 |
+| param | required | type     | describe                |
+| ----- | -------- | -------- | ----------------------- |
+| func  | true     | function | 执行后的回调            |
+| awai  | false    | number   | 间距时间ms，不传默认200 |
 
 **示例:**
 
@@ -79,10 +125,10 @@ console.log('调用API')
 
 点击复制内容
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  text | false  | string、number | 文本内容 |
-|  target | false  | Element | 复制目标元素（复制他里的innerText） |
+| param  | required | type           | describe                            |
+| ------ | -------- | -------------- | ----------------------------------- |
+| text   | false    | string、number | 文本内容                            |
+| target | false    | Element        | 复制目标元素（复制他里的innerText） |
 
 **示例:**
 
@@ -109,9 +155,9 @@ clipboard({
 
 从根源上的深拷贝
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  data | true  | any | 拷贝的内容 |
+| param | required | type | describe   |
+| ----- | -------- | ---- | ---------- |
+| data  | true     | any  | 拷贝的内容 |
 
 **示例:**
 
@@ -123,9 +169,9 @@ decopy({})
 
 获取类型
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  target | true  | any | 查询的目标 |
+| param  | required | type | describe   |
+| ------ | -------- | ---- | ---------- |
+| target | true     | any  | 查询的目标 |
 
 **示例:**
 
@@ -137,9 +183,9 @@ typeOf({}) // object
 
 获取当前路由参数上的地址
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  name | true  | string | 地址上的参数值 |
+| param | required | type   | describe       |
+| ----- | -------- | ------ | -------------- |
+| name  | true     | string | 地址上的参数值 |
 
 **示例:**
 
@@ -155,9 +201,9 @@ const code = getUrlKey('code') // 1321321321
 
 断数据是不是Object类型的数据
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | any | 目标参数 |
+| param | required | type | describe |
+| ----- | -------- | ---- | -------- |
+| val   | true     | any  | 目标参数 |
 
 **示例:**
 
@@ -167,13 +213,14 @@ console.log(isObjectLike(obj)) // true
 let obj = ''
 console.log(isObjectLike(obj)) // false
 ```
+
 ### cached()
 
 记忆函数：缓存函数的运算结果
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  fn | true  | function | 回调函数 |
+| param | required | type     | describe |
+| ----- | -------- | -------- | -------- |
+| fn    | true     | function | 回调函数 |
 
 **示例:**
 
@@ -192,9 +239,9 @@ console.log('count' + count) // 新值 10
 
 把字符串首位转为大写
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | string | 目标参数 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| val   | true     | string | 目标参数 |
 
 **示例:**
 
@@ -212,11 +259,11 @@ console.log(capitalize('abcd')) // Abcd
 
 存入storage缓存，让storage有时间概念
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  value | true  | any |  值 |
-|  distance | true  | number |  时间间距，存多久 |
+| param    | required | type   | describe         |
+| -------- | -------- | ------ | ---------------- |
+| key      | true     | number | 键值             |
+| value    | true     | any    | 值               |
+| distance | true     | number | 时间间距，存多久 |
 
 ```
 setLocalStorage('down', 60, 24*60*60*1000)
@@ -226,9 +273,9 @@ setLocalStorage('down', 60, 24*60*60*1000)
 
 取出缓存
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| key   | true     | number | 键值     |
 
 ```
 getLocalStorage('down')
@@ -238,9 +285,9 @@ getLocalStorage('down')
 
 删除storage缓存
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| key   | true     | number | 键值     |
 
 ```
 removeLocalStorage('down')
@@ -248,13 +295,13 @@ removeLocalStorage('down')
 
 ### setCooick()
 
-设置cooick 
+设置cooick
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  val | true  | any |  值 |
-|  attributes | false  | any | 其他属性，如：加域名范围 |
+| param      | required | type   | describe                 |
+| ---------- | -------- | ------ | ------------------------ |
+| key        | true     | number | 键值                     |
+| val        | true     | any    | 值                       |
+| attributes | false    | any    | 其他属性，如：加域名范围 |
 
 ```
 setCooick('down')
@@ -264,9 +311,9 @@ setCooick('down')
 
 获取cooick
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| key   | true     | number | 键值     |
 
 ```
 getCooick('down')
@@ -276,10 +323,10 @@ getCooick('down')
 
 删除cooick
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  key | true  | number |  键值 |
-|  attributes | false  | any | 其他属性，如：加域名范围 |
+| param      | required | type   | describe                 |
+| ---------- | -------- | ------ | ------------------------ |
+| key        | true     | number | 键值                     |
+| attributes | false    | any    | 其他属性，如：加域名范围 |
 
 ```
 removeCooick('down')
@@ -289,35 +336,36 @@ removeCooick('down')
 
 这是一个包含大部分开发需要用到的时间模块，包括时间格式，引入如下：
 
-
 ### API介绍
 
 ### getHoroscope()
 
 计算星座，传入时间戳返回对应的星座
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-| date  | true  | Number  | 时间戳 |
-
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| date  | true     | Number | 时间戳   |
 
 **示例:**
+
 ```
 let textData: number = new Date().getTime()
 console.log(getHoroscope(textData)) // 双子座
 ```
+
 ### timeDifference()
 
 计算时间差,传入时间配置对象
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  isTimestamp |  true | boolean | 是否传时间戳(true/false)  |
-|  startTime  |  true | number / string  | 时间戳或者是时间格式  |
-|  type | false |  string | 返回类型（day、hours、minutes、seconds、HoursMinutes、HoursMinutesSeconds、timeHours、timeHoursMinutes）  |
-| endTime  | false | number / string | 不传的话默认当前时间 |
+| param       | required | type            | describe                                                                                                 |
+| ----------- | -------- | --------------- | -------------------------------------------------------------------------------------------------------- |
+| isTimestamp | true     | boolean         | 是否传时间戳(true/false)                                                                                 |
+| startTime   | true     | number / string | 时间戳或者是时间格式                                                                                     |
+| type        | false    | string          | 返回类型（day、hours、minutes、seconds、HoursMinutes、HoursMinutesSeconds、timeHours、timeHoursMinutes） |
+| endTime     | false    | number / string | 不传的话默认当前时间                                                                                     |
 
 **示例:**
+
 ```
 console.log('时间差' + timeDifference({
 isTimestamp: false,
@@ -326,17 +374,19 @@ startTime: '2020/6/25 13:26:40',
 endTime: '2020/5/25 13:26:40'
 })) // 时间差31天
 ```
+
 ### getChatTime()
 
 计算相差X秒内的信息会不会显示时间，用于显示聊天消息时间居多，传入时间配置对象
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-| oTime  | true  | number | 起始时间，传时间戳 |
-| nTime | true  | number | 结束时间，时间戳 |
-| differ | true  | number | 开始，结束时间相差间隔 |
+| param  | required | type   | describe               |
+| ------ | -------- | ------ | ---------------------- |
+| oTime  | true     | number | 起始时间，传时间戳     |
+| nTime  | true     | number | 结束时间，时间戳       |
+| differ | true     | number | 开始，结束时间相差间隔 |
 
 **示例:**
+
 ```
 console.log(getChatTime({
 oTime: 1587360400,
@@ -344,50 +394,54 @@ nTime: 1589963293,
 differ: 300
 })) // 2020-05-20 下午 4:28
 ```
+
 ### getTime()
 
 传入一个时间，与当前时间进行比较，比如当天下午6点40分，则显示下午6:40，用于显示显示发布时间、聊天时间居多，传入时间戳
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-| data  | true | number  | 传入时间戳 |
-| isDisplay  | false | boolean  | 是否显示完整时间，不传默认为false |
+| param     | required | type    | describe                          |
+| --------- | -------- | ------- | --------------------------------- |
+| data      | true     | number  | 传入时间戳                        |
+| isDisplay | false    | boolean | 是否显示完整时间，不传默认为false |
 
 **示例:**
+
 ```
 console.log(getTime(1587360400)) // 2020-04-20 下午 1:26
 console.log(getTime(new Date().getTime())) // 下午 6:40
 console.log(getTime(new Date().getTime()， true)) // 2020-06-03 上午 10:41
 ```
+
 ### dateFormat()
 
 格式化时间,可自定义格式，传入一个配置对象
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  time | true  | number |  需要转换格式的时间戳 |
-| formatStr  |  false | string  | 自定义时间格式，不传则显示默认格式：{Y}-{MM}-{DD} {A} {t}:{ii}  |
+| param     | required | type   | describe                                                       |
+| --------- | -------- | ------ | -------------------------------------------------------------- |
+| time      | true     | number | 需要转换格式的时间戳                                           |
+| formatStr | false    | string | 自定义时间格式，不传则显示默认格式：{Y}-{MM}-{DD} {A} {t}:{ii} |
 
 **转换格式表**
 
-| param  | describe  |
-| ------------ | ------------ |
-| Y  | 年  |
-| M  | 不补0的月 |
-| MM  | 补0的月  |
-| Mon  | 大写月  |
-| D  | 不补0的日  |
-|  DD |  补0的日 |
-| h  | 不补0的小时  |
-| hh  |  补0的小时 |
-|  A | 显示上午下午  |
-|  i | 补0的分钟  |
-| ii  | 不补0的分钟  |
-| s  | 补0的秒钟  |
-| ss  | 不补0的秒钟  |
+| param | describe     |
+| ----- | ------------ |
+| Y     | 年           |
+| M     | 不补0的月    |
+| MM    | 补0的月      |
+| Mon   | 大写月       |
+| D     | 不补0的日    |
+| DD    | 补0的日      |
+| h     | 不补0的小时  |
+| hh    | 补0的小时    |
+| A     | 显示上午下午 |
+| i     | 补0的分钟    |
+| ii    | 不补0的分钟  |
+| s     | 补0的秒钟    |
+| ss    | 不补0的秒钟  |
 
 **示例:**
 可以自定义格式： 如 {t}:{ii}
+
 ```
 console.log('当前时间格式化' + dateFormat({
 time: new Date().getTime(),
@@ -405,6 +459,7 @@ time: new Date().getTime()
 
 **示例:**
 可以自定义格式： 如 {t}:{ii}
+
 ```
 console.log('month' + getLastDayOfMonth()) // month30
 ```
@@ -453,10 +508,10 @@ console.log('month' + getLastDayOfMonth()) // month30
 
 获取N天后的日期
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  time | true  | number / Date |  起始时间,可以为时间戳，可以为new出来的时间格式 |
-| count  |  true | number  | 几天后的区间，可为负数  |
+| param | required | type          | describe                                       |
+| ----- | -------- | ------------- | ---------------------------------------------- |
+| time  | true     | number / Date | 起始时间,可以为时间戳，可以为new出来的时间格式 |
+| count | true     | number        | 几天后的区间，可为负数                         |
 
 **示例:**
 
@@ -469,9 +524,9 @@ console.log('获取N天后的日期' + getDate(new Date().getTime(), 7)) // 获�
 
 计算当周开始和结束时间
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  formatStr | false  | string |  不传默认格式{Y}-{MM}-{DD} |
+| param     | required | type   | describe                  |
+| --------- | -------- | ------ | ------------------------- |
+| formatStr | false    | string | 不传默认格式{Y}-{MM}-{DD} |
 
 **示例:**
 
@@ -487,11 +542,11 @@ console.log(getWeekCycle()) // {firstDay: "2020-05-31", lastDay: "2020-06-06"}
 
 **注：只能统一同一种类型，如number类型所有参数必须是number类型，结束时间必须比其实时间晚**
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  beginTime | true  | number / string |  起始时间,可以为时间戳，时间字符格式，可传可不传，不传默认当天 |
-| lastTime  |  true | number / string | 结束时间  |
-| time  |  true | number / string | 需要判断的时间点 |
+| param     | required | type            | describe                                                      |
+| --------- | -------- | --------------- | ------------------------------------------------------------- |
+| beginTime | true     | number / string | 起始时间,可以为时间戳，时间字符格式，可传可不传，不传默认当天 |
+| lastTime  | true     | number / string | 结束时间                                                      |
+| time      | true     | number / string | 需要判断的时间点                                              |
 
 **示例:**
 
@@ -519,14 +574,13 @@ time: 1589963293
 console.log(getExplorerInfo()) // {type: "Chrome", version: 78}
 ```
 
-
 ### getRawType()
 
 获取数据类型
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | string | 目标参数 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| val   | true     | string | 目标参数 |
 
 **示例:**
 
@@ -538,9 +592,9 @@ console.log(getRawType(123)) // Number
 
 获取数据类型
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  val | true  | string | 目标参数 |
+| param | required | type   | describe |
+| ----- | -------- | ------ | -------- |
+| val   | true     | string | 目标参数 |
 
 **示例:**
 
@@ -552,9 +606,9 @@ console.log(isStatic(123)) // true
 
 获取数据类型
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  arr | true  | Array | 目标参数 |
+| param | required | type  | describe |
+| ----- | -------- | ----- | -------- |
+| arr   | true     | Array | 目标参数 |
 
 **示例:**
 
@@ -615,11 +669,11 @@ console.log(checkDomesticTelephone('111111')) // false
 
 必须包含大小写字母和数字的组合，不能使用特殊字符，长度在start-end之间
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  start | true  | number |  起始长度 |
-|  end | true  | number |  结束长度 |
-|  val | true  | any |  需要判断的参数 |
+| param | required | type   | describe       |
+| ----- | -------- | ------ | -------------- |
+| start | true     | number | 起始长度       |
+| end   | true     | number | 结束长度       |
+| val   | true     | any    | 需要判断的参数 |
 
 **示例**
 
@@ -640,11 +694,11 @@ val: 'A12345'
 
 以字母开头，长度在start~end之间，只能包含字母、数字和下划线
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  start | true  | number |  起始长度 |
-|  end | true  | number |  结束长度 |
-|  val | true  | any |  需要判断的参数 |
+| param | required | type   | describe       |
+| ----- | -------- | ------ | -------------- |
+| start | true     | number | 起始长度       |
+| end   | true     | number | 结束长度       |
+| val   | true     | any    | 需要判断的参数 |
 
 **示例**
 
@@ -808,10 +862,10 @@ console.log(checkStrComposedOfNumber('abc')) // false
 
 验证字符串是否是数字
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  length | true  | number |  目标长度 |
-|  val | true  | any |  需要判断的参数 |
+| param  | required | type   | describe       |
+| ------ | -------- | ------ | -------------- |
+| length | true     | number | 目标长度       |
+| val    | true     | any    | 需要判断的参数 |
 
 **示例**
 
@@ -830,11 +884,11 @@ val: '12354666'
 
 检测m-n位的数字
 
-| param  |  required | type  | describe  |
-| ------------ | ------------ | ------------ | ------------ |
-|  start | true  | number |  目标长度起始长度 |
-|  end | true  | number |  目标长度结束长度 |
-|  val | true  | any |  需要判断的参数 |
+| param | required | type   | describe         |
+| ----- | -------- | ------ | ---------------- |
+| start | true     | number | 目标长度起始长度 |
+| end   | true     | number | 目标长度结束长度 |
+| val   | true     | any    | 需要判断的参数   |
 
 **示例**
 
@@ -904,6 +958,7 @@ console.log(checkPND(';asda')) // false
 console.log(checkPositiveTDP(123245.12)) // true
 console.log(checkPositiveTDP(-123.12)) // false
 ```
+
 ### checkOandTPositive()
 
 有1~3位小数的正实数
@@ -914,6 +969,7 @@ console.log(checkPositiveTDP(-123.12)) // false
 console.log(checkOandTPositive(123245.12)) // true
 console.log(checkOandTPositive(-123.12)) // false
 ```
+
 ### checkNonzeroPositive()
 
 非零的正整数
@@ -924,6 +980,7 @@ console.log(checkOandTPositive(-123.12)) // false
 console.log(checkNonzeroPositive(123245)) // true
 console.log(checkNonzeroPositive(-123.12)) // false
 ```
+
 ### checkNotPositive()
 
 非正整数
@@ -946,6 +1003,7 @@ console.log(checkNonzeroPositive(-123.12)) // false
 console.log(checkNonzeroNegative(-123245)) // true
 console.log(checkNonzeroNegative(123)) // false
 ```
+
 ### checkNotNegative()
 
 非负整数

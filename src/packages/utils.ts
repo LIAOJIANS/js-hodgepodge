@@ -36,7 +36,13 @@ export const delay = <T>(dur: number = 0) => {
 }
 
 // 获取标准URL上的参数
-export const getUrlKey = <T extends string>(name: T): string | null | undefined => decodeURIComponent(((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1] as any).replace(/\+/g, '%20')) || null
+export const getUrlKey = 
+  <T extends string>(name: T): string | null | undefined => 
+    decodeURIComponent(
+      (
+        (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1] as any)
+          .replace(/\+/g, '%20')
+    ) || null
 
 // 缓存函数
 export const cached = <T extends Function>(fn: T): Function => {
@@ -131,3 +137,65 @@ export const strJson = <T>(
     return (new Function(`return ${str}`)())
   }
 }
+
+// 基于Window环境下的事件分发
+export function createEventHandler<DataType>(name: string) {
+
+  const addEventListener = (
+    Win: Window,
+    fn: (e: { detail: DataType }) => void
+  ) => {
+    // @ts-ignore
+    Win.addEventListener(name, fn)
+
+    // @ts-ignore
+    const eject = () => Win.removeEventListener(name, fn)
+
+    return eject
+  }
+
+  const dispatch = (
+    Win: Window,
+    data: DataType
+  ) => {
+    Win.dispatchEvent(
+      new CustomEvent(name, { detail: data })
+    )
+  }
+
+  return {
+    addEventListener,
+    dispatch
+  }
+
+}
+
+export interface Defer {
+  (): {
+    resolve: () => void,
+    reject: (...args: any[]) => void,
+    promise: Promise<void>
+  },
+
+  <T>(): {
+    resolve: (val: T) => void,
+    reject: (...args: any[]) => void,
+    promise: Promise<T>
+  },
+}
+
+// 统一Promise状态
+export const defer: Defer = () => {
+  const dfd = {} as any
+
+  dfd.promise = new Promise((
+    reslove,
+    reject
+  ) => {
+    dfd.reslove = reslove as any
+    dfd.reject = reject
+  })
+
+  return dfd
+}
+

@@ -13,7 +13,9 @@ import {
 
   tasInterface,
   recomArrs,
-  strJson
+  strJson,
+  createEventHandler,
+  defer
 } from './packages/utils'
 
 
@@ -119,6 +121,7 @@ import {
 
 export {
   decopy,
+  defer,
 
   throttle,
   debounce,
@@ -130,6 +133,7 @@ export {
   isStatic,
   unique,
   recomArrs,
+  createEventHandler,
 
   tasInterface,
 
