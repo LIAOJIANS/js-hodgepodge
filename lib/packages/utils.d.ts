@@ -9,3 +9,23 @@ export declare const isStatic: <T>(val: T) => boolean;
 export declare const getRawType: <T>(val: T) => string;
 export declare const unique: <T extends number[]>(arr: T) => any[];
 export declare const recomArrs: <T>(data: any[] | T[], dim?: number | undefined) => T[];
+export declare const strJson: <T>(str: string) => T;
+export declare function createEventHandler<DataType>(name: string): {
+    addEventListener: (Win: Window, fn: (e: {
+        detail: DataType;
+    }) => void) => () => void;
+    dispatch: (Win: Window, data: DataType) => void;
+};
+export interface Defer {
+    (): {
+        resolve: () => void;
+        reject: (...args: any[]) => void;
+        promise: Promise<void>;
+    };
+    <T>(): {
+        resolve: (val: T) => void;
+        reject: (...args: any[]) => void;
+        promise: Promise<T>;
+    };
+}
+export declare const defer: Defer;
